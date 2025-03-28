@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>barebones/button_instant - ProdUI (Beta) Documentation</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "barebones/button_instant";
+        var mkdocs_page_input_path = "widgets/barebones/button_instant.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> ProdUI (Beta) Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">ProdUI</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements/">Acknowledgements</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../miscellaneous/">Miscellaneous</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../reference/context_callbacks/">Context Callbacks</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../reference/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../reference/labels/">Labels</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../reference/layout/">Layout</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../reference/menus/">Menus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../reference/mouse_cursor/">Mouse Cursor State</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../reference/reshaping/">Reshaping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../reference/scrolling/">Scrolling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../reference/themes/">Themes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../reference/widget_callbacks/">Widget Callbacks</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../reference/widget_event_callbacks/">Widgets</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../reference/widget_events/">Widget Events</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../reference/wimp_interface/">WIMP Interface</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Widgets</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" >Barebones</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../button/">barebones/button</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">barebones/button_instant</a>
+    <ul class="current">
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../button_repeat/">barebones/button_repeat</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../button_sticky/">barebones/button_sticky</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../checkbox/">barebones/checkbox</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../input_box/">barebones/input_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../label/">barebones/label</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../radio_button/">barebones/radio_button</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../slider_bar/">barebones/slider_bar</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Base</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../base/button/">base/button</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../base/button_double_click/">base/button_double_click</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../base/button_instant/">base/button_instant</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../base/button_repeat/">base/button_repeat</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../base/button_sticky/">base/button_sticky</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../base/checkbox/">base/checkbox</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../base/checkbox_multi/">base/checkbox_multi</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../base/container/">base/container</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../base/container_simple/">base/container_simple</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../base/dial/">base/dial</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../base/generic/">base/generic</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../base/label/">base/label</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../base/menu/">base/menu</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../base/menu_simple/">base/menu_simple</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../base/radio_button/">base/radio_button</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../base/slider_bar/">base/slider_bar</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../base/stepper/">base/stepper</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../base/text/">base/text</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Input</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../input/text_box_multi/">input/text_box_multi</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../input/text_box_single/">input/text_box_single</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Status</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../status/progress_bar/">status/progress_bar</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Wimp</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../wimp/button_split/">wimp/button_split</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../wimp/combo_box/">wimp/combo_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../wimp/dropdown_box/">wimp/dropdown_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../wimp/dropdown_pop/">wimp/dropdown_pop</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../wimp/group/">wimp/group</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../wimp/icon_box/">wimp/icon_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../wimp/list_box/">wimp/listbox</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../wimp/menu_bar/">wimp/menu_bar</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../wimp/menu_tab/">wimp/menu_tab</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../wimp/number_box/">wimp/number_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../wimp/properties_box/">wimp/properties_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../wimp/root_wimp/">wimp/root_wimp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../wimp/text_block/">wimp/text_block</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../wimp/tree_box/">wimp/tree_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../wimp/window_frame/">wimp/window_frame</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../wimp/workspace/">wimp/workspace</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Embed</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../wimp/embed/checkbox/">wimp/embed/checkbox</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">ProdUI (Beta) Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Widgets</li>
+          <li class="breadcrumb-item">Barebones</li>
+      <li class="breadcrumb-item active">barebones/button_instant</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="barebonesbutton_instant">barebones/button_instant</h1>
+<p>An unskinned button that activates on the initial click down.</p>
+<p><strong>TODO</strong></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../button/" class="btn btn-neutral float-left" title="barebones/button"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../button_repeat/" class="btn btn-neutral float-right" title="barebones/button_repeat">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../button/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../button_repeat/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

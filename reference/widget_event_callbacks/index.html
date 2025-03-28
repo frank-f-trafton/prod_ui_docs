@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Widgets - ProdUI (Beta) Documentation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Widgets";
+        var mkdocs_page_input_path = "reference/widget_event_callbacks.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ProdUI (Beta) Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">ProdUI</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../acknowledgements/">Acknowledgements</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../miscellaneous/">Miscellaneous</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../context_callbacks/">Context Callbacks</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../labels/">Labels</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../layout/">Layout</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../menus/">Menus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mouse_cursor/">Mouse Cursor State</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../reshaping/">Reshaping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../scrolling/">Scrolling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../themes/">Themes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../widget_callbacks/">Widget Callbacks</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Widgets</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#event-dispatch">Event Dispatch</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-ui-thimble">The UI Thimble</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#a-note-on-capturing">A Note on "Capturing"</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#reserved-field-prefixes">Reserved Field prefixes</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#fields-with-base-widget-metatable-dummy-values">Fields with base widget metatable dummy values</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#fields-with-per-instance-metatable-dummy-values">Fields with per-instance metatable dummy values</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#fields-with-defaults-in-the-widget-metatable">Fields with defaults in the widget metatable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#fields-set-during-instance-creation-before-uicall_initialize">Fields set during instance creation (before uiCall_initialize())</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#fields-set-during-instance-destruction">Fields set during instance destruction</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#fields-applicable-to-widgets-with-children">Fields applicable to widgets with children</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#skin-fields">Skin fields</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#widget-viewports">Widget Viewports</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../widget_events/">Widget Events</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../wimp_interface/">WIMP Interface</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Widgets</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Barebones</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/barebones/button/">barebones/button</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/barebones/button_instant/">barebones/button_instant</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/barebones/button_repeat/">barebones/button_repeat</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/barebones/button_sticky/">barebones/button_sticky</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/barebones/checkbox/">barebones/checkbox</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/barebones/input_box/">barebones/input_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/barebones/label/">barebones/label</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/barebones/radio_button/">barebones/radio_button</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/barebones/slider_bar/">barebones/slider_bar</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Base</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/button/">base/button</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/button_double_click/">base/button_double_click</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/button_instant/">base/button_instant</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/button_repeat/">base/button_repeat</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/button_sticky/">base/button_sticky</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/checkbox/">base/checkbox</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/checkbox_multi/">base/checkbox_multi</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/container/">base/container</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/container_simple/">base/container_simple</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/dial/">base/dial</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/generic/">base/generic</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/label/">base/label</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/menu/">base/menu</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/menu_simple/">base/menu_simple</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/radio_button/">base/radio_button</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/slider_bar/">base/slider_bar</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/stepper/">base/stepper</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/text/">base/text</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Input</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/input/text_box_multi/">input/text_box_multi</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/input/text_box_single/">input/text_box_single</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Status</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/status/progress_bar/">status/progress_bar</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Wimp</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/button_split/">wimp/button_split</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/combo_box/">wimp/combo_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/dropdown_box/">wimp/dropdown_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/dropdown_pop/">wimp/dropdown_pop</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/group/">wimp/group</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/icon_box/">wimp/icon_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/list_box/">wimp/listbox</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/menu_bar/">wimp/menu_bar</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/menu_tab/">wimp/menu_tab</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/number_box/">wimp/number_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/properties_box/">wimp/properties_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/root_wimp/">wimp/root_wimp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/text_block/">wimp/text_block</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/tree_box/">wimp/tree_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/window_frame/">wimp/window_frame</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/workspace/">wimp/workspace</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Embed</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../widgets/wimp/embed/checkbox/">wimp/embed/checkbox</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ProdUI (Beta) Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Reference</li>
+      <li class="breadcrumb-item active">Widgets</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="widgets">Widgets</h1>
+<p>ProdUI uses a basic form of inheritance to provide methods to widgets. When an instance calls a method, it checks:</p>
+<ul>
+<li>Itself</li>
+<li>Its widget definition</li>
+<li><code>_mt_widget</code>, the base table for all widgets</li>
+</ul>
+<p>This is implemented with Lua's built-in <code>__index</code> metamethod. Further subclassing is not supported.</p>
+<p>All widgets are axis aligned rectangles, even if they are invisible and appear formless in UI space.</p>
+<h2 id="event-dispatch">Event Dispatch</h2>
+<p>ProdUI supports four forms of event dispatch:
+  * <code>self:sendEvent()</code>: Just query <code>self</code>.
+  * <code>self:bubbleEvent()</code>: Ascend from the target widget to the root.
+  * <code>self:trickleEvent()</code>: Descend from the root to the target widget.
+  * <code>self:cycleEvent()</code>: Trickle down, then bubble up.</p>
+<p>The main event callbacks are attached to its indexed metatable, like this:</p>
+<pre><code class="language-lua">function def:uiCall_keyPressed(inst, key, scancode, isrepeat)
+</code></pre>
+<p>These are used in <code>direct</code>, <code>bubble</code>, and the direct and bubble phases of <code>cycle</code>.</p>
+<p>Trickle callbacks are used less frequently, and are stored in a subtable in order to keep the two separated:</p>
+<pre><code class="language-lua">function def.trickle:uiCall_keyPressed(inst, key, scancode, isrepeat)
+</code></pre>
+<p>Note that the colon syntax is misleading here: we always call the function on the widget table directly, never on <code>wid.trickle</code>. Colon syntax is used only to maintain argument parity with the main callbacks in the source code (so that we don't have to add or remove 'self' when moving code snippets back and forth).</p>
+<p>Typically, the first argument after <code>self</code> is the original calling instance. Widgets that do not have the relevant field are ignored.</p>
+<p>Propagation is halted as soon as a widget returns a value that evaluates to true.</p>
+<p>You can use <code>if self == inst then...</code> to differentiate between events acting on <code>self</code>, or events bubbled up from a descendant.</p>
+<h2 id="the-ui-thimble">The UI Thimble</h2>
+<p>"Thimble" is an arbitrary term for which widget currently has focus. The name is unlikely to be mistaken for other kinds of focus: OS window focus, in-application frame focus, mouse hover + press state, selections within menus, and so on. Generally, the widget which has the thimble is also the target for keyboard input.</p>
+<p>Lamentably, there are two thimbles: <code>thimble1</code> and <code>thimble2</code>. The first is for "concrete" widgets, while the second is for "ephemeral" components like pop-up menus. The <em>Top Thimble</em> is the highest one that is currently assigned to a widget:</p>
+<pre><code>+--------------------------------------------+
+| thimble1 | thimble2 | Top Thimble is...    |
++----------+----------+----------------------+
+|          |          | Neither              |
+|    x     |          | thimble1             |
+|          |    x     | thimble2             |
+|    x     |    x     | thimble2             |
++--------------------------------------------+
+</code></pre>
+<p>This system, confusing as it is, allows a concrete widget to know that it is still selected, even if key events are temporarily directed to an ephemeral widget.</p>
+<h2 id="a-note-on-capturing">A Note on "Capturing"</h2>
+<p>A widget can "capture" the UI context. When this happens, all prodUI events are passed to the widget first, and it has the option to deny the event from being handled further by the context. This can be used to implement custom behaviors without interference from the context or other widgets.</p>
+<p>While this enables some nice widget behaviors, be warned that capturing is prone to subtle input bugs. By default, if a capturing widget does not have a capture callback for an event type, then it is always passed on to the main event handler. You may need to capture events that have nothing to do with the desired behavior, and handle them appropriately or discard them. Consolidating similar capture behavior into shared functions is recommended.</p>
+<h2 id="reserved-field-prefixes">Reserved Field prefixes</h2>
+<p>These fields are reserved by ProdUI in widget tables.</p>
+<p><code>lo_*</code>: Layout system</p>
+<p><code>ly_*</code>: Canvas layering</p>
+<p><code>sk_*</code>: Skinner and skin data</p>
+<p><code>usr_*</code>: Arbitrary user (application developer) variables</p>
+<p><code>vp_*</code>: Viewport data (See: Widget Viewports)</p>
+<h3 id="fields-with-base-widget-metatable-dummy-values">Fields with base widget metatable dummy values</h3>
+<p><code>tag</code> (empty string) A string you can use to help locate widgets.</p>
+<p><code>scr_x, scr_y</code>: Scroll registers, applicable to a widget's children.</p>
+<p><code>awake</code>: When false, the widget and its descendants are skipped when updating.</p>
+<p><code>can_have_thimble</code>: When true, widget can obtain the thimble (the UI cursor). As a prerequisite, <code>awake</code> must also be true.</p>
+<p><code>allow_hover</code>: When true, widget is eligible for the 'current_hover' context state. When false, it and all of its descendants are skipped.</p>
+<h3 id="fields-with-per-instance-metatable-dummy-values">Fields with per-instance metatable dummy values</h3>
+<p><code>id</code>: The identifier value for the widget, as set when the widget def was loaded. Typically a string. Do not modify.</p>
+<h3 id="fields-with-defaults-in-the-widget-metatable">Fields with defaults in the widget metatable</h3>
+<p><code>x, y</code>: (0, 0) Position of the widget relative to its parent's upper-left corner.</p>
+<p><code>w, h</code>: (0, 0) Size of the widget body, in pixels. Must be at least zero.</p>
+<h3 id="fields-set-during-instance-creation-before-uicall_initialize">Fields set during instance creation (before uiCall_initialize())</h3>
+<p><code>context</code>: a link to the UI Context that this widget belongs to. Do not modify.</p>
+<p><code>parent</code>: a link to the widget's parent, or false if there is no parent. Do not modify.</p>
+<p><code>children</code>: table of child widgets and further descendants. This table may be a dummy reference if '_no_descendants' was set in the def. Do not modify directly.</p>
+<h3 id="fields-set-during-instance-destruction">Fields set during instance destruction</h3>
+<p><code>_dead</code>: Identifies widgets that are being removed or have already been removed. Can be read, but do not modify.
+  * nil: the widget is still part of the context.
+  * "dying": the widget is in the process of being removed from the context.
+  * "dead": The widget has been removed from the context.</p>
+<h3 id="fields-applicable-to-widgets-with-children">Fields applicable to widgets with children</h3>
+<p><code>hide_children</code>: When truthy, children are not rendered.</p>
+<p><code>clip_scissor</code>: When true, rendering of children is clipped to the widget's body. When "manual", the scissor region is specified in 'clip_scissor_x', 'clip_scissor_y', 'clip_scissor_w', and 'clip_scissor_h', relative to the top-left of the widget.</p>
+<p>NOTE: don't use math.huge with setScissor or intersectScissor. It will become zero. -2^16 and 2^17 seem OK.</p>
+<p><code>clip_hover</code>: When true, mouse hover and click detection against children is clipped to the widget's body. When "manual", the clipping region is specified in 'clip_hover_x', 'clip_hover_y', 'clip_hover_w' and 'clip_hover_h'.</p>
+<p><code>_no_descendants</code>: When true, upon widget creation, a special shared table is assigned to self.children. This table raises an error if self:addChild() is used, or if anything assigns a new field via __newindex.</p>
+<p>Use with care: it cannot catch every instance of messing with the table. For example, rawset() and table.insert() do not invoke __newindex.</p>
+<h3 id="skin-fields">Skin fields</h3>
+<p><code>skin_id</code>: Used when assigning the widget's skin. Skins allow the appearance of widgets to be customized. Not all widgets support skins, and most skins are designed for one or a few specific widgets or skinners (implementations).</p>
+<p>Once set, skin_id should not be modified except as part of a skinner/skin replacement action.</p>
+<p><code>skinner</code>, <code>skin</code>: The skinning implementation and data package, respectively. They are assigned to skinned widgets by self:skinSetRefs(). Avoid modifying these tables from the widget instance code, as the changes will affect all other widgets with the same skinner / skin.</p>
+<h3 id="widget-viewports">Widget Viewports</h3>
+<p>Viewports are rectangles that widgets can use for placement of their internals, and as the basis for built-in mouse sensors.</p>
+<p><code>Viewport #1: self.vp_x, self.vp_y, self.vp_w, self.vp_h</code></p>
+<p><code>Viewport #2: self.vp2_x, self.vp2_y, self.vp2_w, self.vp2_h</code></p>
+<p>Up to eight viewports per widget are permitted by the support code that manages them.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../widget_callbacks/" class="btn btn-neutral float-left" title="Widget Callbacks"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../widget_events/" class="btn btn-neutral float-right" title="Widget Events">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../widget_callbacks/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../widget_events/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,2094 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Widget Events - ProdUI (Beta) Documentation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Widget Events";
+        var mkdocs_page_input_path = "reference/widget_events.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ProdUI (Beta) Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">ProdUI</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../acknowledgements/">Acknowledgements</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../miscellaneous/">Miscellaneous</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../context_callbacks/">Context Callbacks</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../labels/">Labels</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../layout/">Layout</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../menus/">Menus</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../mouse_cursor/">Mouse Cursor State</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../reshaping/">Reshaping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../scrolling/">Scrolling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../themes/">Themes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../widget_callbacks/">Widget Callbacks</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../widget_event_callbacks/">Widgets</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Widget Events</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_gamepadreleased">uiCall_gamepadReleased</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_gamepadaxis">uiCall_gamepadAxis</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_1">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_1">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_1">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_1">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_1">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_gamepadpressed">uiCall_gamepadPressed</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_2">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_2">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_2">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_2">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_2">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_joystickhat">uiCall_joystickHat</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_3">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_3">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_3">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_3">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_3">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_joystickaxis">uiCall_joystickAxis</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_4">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_4">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_4">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_4">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_4">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_joystickreleased">uiCall_joystickReleased</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_5">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_5">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_5">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_5">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_5">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_joystickpressed">uiCall_joystickPressed</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_6">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_6">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_6">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_6">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_6">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_windowvisible">uiCall_windowVisible</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_7">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_7">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_7">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_7">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_7">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_windowresize">uiCall_windowResize</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_8">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_8">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_8">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_8">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_8">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_joystickadded">uiCall_joystickAdded</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_9">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_9">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_9">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_9">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_9">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_joystickremoved">uiCall_joystickRemoved</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_10">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_10">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_10">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_10">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_10">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_update">uiCall_update</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_11">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_11">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_11">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_11">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_11">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notes">Notes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_windowfocus">uiCall_windowFocus</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_12">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_12">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_12">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_12">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_12">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_mousefocus">uiCall_mouseFocus</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_13">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_13">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_13">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_13">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_13">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_reshape">uiCall_reshape</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_14">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_14">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_14">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_14">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_1">Notes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_initialize">uiCall_initialize</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_15">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_15">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_15">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_14">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_15">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_2">Notes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_destroy">uiCall_destroy</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_16">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_16">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_16">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_15">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_16">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_3">Notes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_pointerhoveron">uiCall_pointerHoverOn</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_17">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_17">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_17">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_16">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_17">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_4">Notes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_pointerhoveroff">uiCall_pointerHoverOff</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_18">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_18">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_18">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_17">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_18">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_5">Notes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_pointerhover">uiCall_pointerHover</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_19">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_19">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_19">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_18">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_19">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_pointerpress">uiCall_pointerPress</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_20">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_20">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_20">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_19">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_20">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_6">Notes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_pointerpressrepeat">uiCall_pointerPressRepeat</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_21">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_21">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_21">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_20">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_21">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_7">Notes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_pointerrelease">uiCall_pointerRelease</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_22">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_22">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_22">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_21">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_22">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_8">Notes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_pointerunpress">uiCall_pointerUnpress</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_23">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_23">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_23">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_22">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_23">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_9">Notes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_pointerdrag">uiCall_pointerDrag</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_24">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_24">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_24">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_23">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_24">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_10">Notes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_pointerwheel">uiCall_pointerWheel</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_25">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_25">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_25">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_24">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_25">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_pointerdragdeston">uiCall_pointerDragDestOn</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_26">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_26">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_26">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_25">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_26">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_11">Notes</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#more-notes">More Notes</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_pointerdragdestoff">uiCall_pointerDragDestOff</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_27">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_27">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_27">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_26">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_27">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_pointerdragdestmove">uiCall_pointerDragDestMove</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_28">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_28">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_28">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_27">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_28">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_12">Notes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_pointerdragdestrelease">uiCall_pointerDragDestRelease</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_29">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_29">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_29">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_28">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_29">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_thimble1take">uiCall_thimble1Take</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_30">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_30">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_30">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_29">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_30">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_thimble2take">uiCall_thimble2Take</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_31">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_31">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_31">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_30">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_31">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_thimble1release">uiCall_thimble1Release</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_32">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_32">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_32">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_31">Parameters{</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_32">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_thimble2release">uiCall_thimble2Release</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_33">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_33">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_33">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_32">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_33">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_thimbletoptake">uiCall_thimbleTopTake</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_34">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_34">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_34">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_33">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_34">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_thimbletoprelease">uiCall_thimbleTopRelease</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_35">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_35">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_35">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_34">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_35">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_thimble1changed">uiCall_thimble1Changed</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_36">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_36">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_36">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_35">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_36">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_thimble2changed">uiCall_thimble2Changed</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_37">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_37">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_37">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_36">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_37">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_thimbleaction">uiCall_thimbleAction</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_38">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_38">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_38">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_37">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_38">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_13">Notes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_thimbleaction2">uiCall_thimbleAction2</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_39">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_39">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_39">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_38">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_39">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_14">Notes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_keypressed">uiCall_keyPressed</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_40">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_40">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_40">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_39">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_40">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_keyreleased">uiCall_keyReleased</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_41">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_41">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_41">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_40">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_41">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_textinput">uiCall_textInput</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_42">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_42">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_42">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_41">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_42">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_15">Notes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_filedropped">uiCall_fileDropped</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_43">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_43">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_43">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_42">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_43">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_16">Notes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_directorydropped">uiCall_directoryDropped</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_44">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_44">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_44">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_43">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_44">Returns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_17">Notes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_capture">uiCall_capture</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_45">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_45">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_45">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_45">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_uncapture">uiCall_uncapture</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_46">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_46">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_46">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_46">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_capturetick">uiCall_captureTick</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_47">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_47">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_47">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#parameters_44">Parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_47">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../wimp_interface/">WIMP Interface</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Widgets</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Barebones</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/barebones/button/">barebones/button</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/barebones/button_instant/">barebones/button_instant</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/barebones/button_repeat/">barebones/button_repeat</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/barebones/button_sticky/">barebones/button_sticky</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/barebones/checkbox/">barebones/checkbox</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/barebones/input_box/">barebones/input_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/barebones/label/">barebones/label</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/barebones/radio_button/">barebones/radio_button</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/barebones/slider_bar/">barebones/slider_bar</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Base</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/button/">base/button</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/button_double_click/">base/button_double_click</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/button_instant/">base/button_instant</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/button_repeat/">base/button_repeat</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/button_sticky/">base/button_sticky</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/checkbox/">base/checkbox</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/checkbox_multi/">base/checkbox_multi</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/container/">base/container</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/container_simple/">base/container_simple</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/dial/">base/dial</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/generic/">base/generic</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/label/">base/label</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/menu/">base/menu</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/menu_simple/">base/menu_simple</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/radio_button/">base/radio_button</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/slider_bar/">base/slider_bar</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/stepper/">base/stepper</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/text/">base/text</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Input</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/input/text_box_multi/">input/text_box_multi</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/input/text_box_single/">input/text_box_single</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Status</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/status/progress_bar/">status/progress_bar</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Wimp</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/button_split/">wimp/button_split</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/combo_box/">wimp/combo_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/dropdown_box/">wimp/dropdown_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/dropdown_pop/">wimp/dropdown_pop</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/group/">wimp/group</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/icon_box/">wimp/icon_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/list_box/">wimp/listbox</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/menu_bar/">wimp/menu_bar</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/menu_tab/">wimp/menu_tab</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/number_box/">wimp/number_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/properties_box/">wimp/properties_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/root_wimp/">wimp/root_wimp</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/text_block/">wimp/text_block</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/tree_box/">wimp/tree_box</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/window_frame/">wimp/window_frame</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../widgets/wimp/workspace/">wimp/workspace</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Embed</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../widgets/wimp/embed/checkbox/">wimp/embed/checkbox</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ProdUI (Beta) Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Reference</li>
+      <li class="breadcrumb-item active">Widget Events</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="widget-events">Widget Events</h1>
+<p>This page lists ProdUI's built-in widget events.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_gamepadreleased">uiCall_gamepadReleased</h2>
+<p>A held gamepad button was released.</p>
+<h3 id="propagation-method">Propagation Method</h3>
+<p>TODO</p>
+<h3 id="event-origin">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.gamepadreleased">love.gamepadreleased</a></p>
+<h3 id="signature">Signature</h3>
+<p><code>def:uiCall_gamepadReleased(inst, joystick, button)</code></p>
+<h4 id="parameters">Parameters</h4>
+<ul>
+<li>
+<p><code>inst</code> (ui:Widget) The target widget instance.</p>
+</li>
+<li>
+<p><code>joystick</code> (love:Joystick) The joystick associated with the event.</p>
+</li>
+<li>
+<p><code>button</code> (love:GamepadButton) The ID of the released gamepad button.</p>
+</li>
+</ul>
+<h4 id="returns">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_gamepadaxis">uiCall_gamepadAxis</h2>
+<p>A gamepad axis moved.</p>
+<h3 id="propagation-method_1">Propagation Method</h3>
+<p>TODO</p>
+<h3 id="event-origin_1">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.gamepadaxis">love.gamepadaxis</a></p>
+<h3 id="signature_1">Signature</h3>
+<p><code>def:uiCall_gamepadAxis(inst, joystick, axis, value)</code></p>
+<h4 id="parameters_1">Parameters</h4>
+<ul>
+<li>
+<p><code>inst</code>: (ui:Widget) The target widget instance.</p>
+</li>
+<li>
+<p><code>joystick</code>: (love:Joystick) The joystick associated with the event.</p>
+</li>
+<li>
+<p><code>value</code>: (Number) The value of the axis.</p>
+</li>
+</ul>
+<h4 id="returns_1">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_gamepadpressed">uiCall_gamepadPressed</h2>
+<p>A gamepad button was pressed.</p>
+<h3 id="propagation-method_2">Propagation Method</h3>
+<p>TODO</p>
+<h3 id="event-origin_2">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.gamepadpressed">love.gamepadpressed</a></p>
+<h3 id="signature_2">Signature</h3>
+<p><code>def:uiCall_gamepadPressed(inst, joystick, button)</code></p>
+<h4 id="parameters_2">Parameters</h4>
+<ul>
+<li>
+<p><code>inst</code>: (ui:Widget) The target widget instance.</p>
+</li>
+<li>
+<p><code>joystick</code>: (love:Joystick) The joystick associated with the event.</p>
+</li>
+<li>
+<p><code>button</code>: (love:GamepadButton) The button ID.</p>
+</li>
+</ul>
+<h4 id="returns_2">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_joystickhat">uiCall_joystickHat</h2>
+<p>A joystick POV hat moved.</p>
+<h3 id="propagation-method_3">Propagation Method</h3>
+<p>TODO</p>
+<h3 id="event-origin_3">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.joystickhat">love.joystickhat</a></p>
+<h3 id="signature_3">Signature</h3>
+<p><code>def:uiCall_joystickHat(inst, joystick, hat, direction)</code></p>
+<h4 id="parameters_3">Parameters</h4>
+<ul>
+<li>
+<p><code>inst</code>: (ui:Widget) The target widget instance.</p>
+</li>
+<li>
+<p><code>joystick</code>: (love:Joystick) The joystick associated with the event.</p>
+</li>
+<li>
+<p><code>hat</code>: (Number) The hat index.</p>
+</li>
+<li>
+<p><code>direction</code>: (love:JoystickHat) The hat direction.</p>
+</li>
+</ul>
+<h4 id="returns_3">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_joystickaxis">uiCall_joystickAxis</h2>
+<p>A joystick axis moved.</p>
+<h3 id="propagation-method_4">Propagation Method</h3>
+<p>TODO</p>
+<h3 id="event-origin_4">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.joystickaxis">love.joystickaxis</a></p>
+<h3 id="signature_4">Signature</h3>
+<p><code>def:uiCall_joystickAxis(inst, joystick, axis, value)</code></p>
+<h4 id="parameters_4">Parameters</h4>
+<ul>
+<li>
+<p><code>inst</code>: (ui:Widget) The target widget instance.</p>
+</li>
+<li>
+<p><code>joystick</code>: (love:Joystick) The joystick associated with the event.</p>
+</li>
+<li>
+<p><code>axis</code>: (Number) The axis index.</p>
+</li>
+<li>
+<p><code>value</code>: (Number) The axis value.</p>
+</li>
+</ul>
+<h4 id="returns_4">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_joystickreleased">uiCall_joystickReleased</h2>
+<p>A joystick button was released.</p>
+<h3 id="propagation-method_5">Propagation Method</h3>
+<p>TODO</p>
+<h3 id="event-origin_5">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.joystickreleased">love.joystickreleased</a></p>
+<h3 id="signature_5">Signature</h3>
+<p><code>def:uiCall_joystickReleased(inst, joystick, button)</code></p>
+<h4 id="parameters_5">Parameters</h4>
+<ul>
+<li>
+<p><code>inst</code>: (ui:Widget) The target widget instance.</p>
+</li>
+<li>
+<p><code>joystick</code>: (love:Joystick) The joystick associated with the event.</p>
+</li>
+<li>
+<p><code>button</code>: (number) The button index.</p>
+</li>
+</ul>
+<h4 id="returns_5">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_joystickpressed">uiCall_joystickPressed</h2>
+<p>A joystick button was pressed.</p>
+<h3 id="propagation-method_6">Propagation Method</h3>
+<p>TODO</p>
+<h3 id="event-origin_6">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.joystickpressed">love.joystickpressed</a></p>
+<h3 id="signature_6">Signature</h3>
+<p><code>def:uiCall_joystickPressed(inst, joystick, button)</code></p>
+<h4 id="parameters_6">Parameters</h4>
+<ul>
+<li>
+<p><code>inst</code>: (ui:Widget) The target widget instance.</p>
+</li>
+<li>
+<p><code>joystick</code>: (love:Joystick) The joystick associated with the event.</p>
+</li>
+<li>
+<p><code>button</code>: (number) The button index.</p>
+</li>
+</ul>
+<h4 id="returns_6">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_windowvisible">uiCall_windowVisible</h2>
+<p>The application window's visibility changed.</p>
+<h3 id="propagation-method_7">Propagation Method</h3>
+<p>Sent to root.</p>
+<h3 id="event-origin_7">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.visible">love.visible</a></p>
+<h3 id="signature_7">Signature</h3>
+<p><code>def:uiCall_windowVisible(visible)</code></p>
+<h4 id="parameters_7">Parameters</h4>
+<ul>
+<li><code>visible</code>: (Boolean) True if the window is visible, false if not.</li>
+</ul>
+<h4 id="returns_7">Returns</h4>
+<p>Nothing.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_windowresize">uiCall_windowResize</h2>
+<p>The application window was resized.</p>
+<h3 id="propagation-method_8">Propagation Method</h3>
+<p>Sent to root.</p>
+<h3 id="event-origin_8">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.resize">love.resize</a></p>
+<h3 id="signature_8">Signature</h3>
+<p><code>def:uiCall_windowResize(w, h)</code></p>
+<h4 id="parameters_8">Parameters</h4>
+<ul>
+<li><code>w</code>, <code>h</code>: (Number) The new window width and height.</li>
+</ul>
+<h4 id="returns_8">Returns</h4>
+<p>Nothing.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_joystickadded">uiCall_joystickAdded</h2>
+<p>A joystick was connected.</p>
+<h3 id="propagation-method_9">Propagation Method</h3>
+<p>Sent to root.</p>
+<h3 id="event-origin_9">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.joystickadded">love.joystickadded</a></p>
+<h3 id="signature_9">Signature</h3>
+<p><code>def:uiCall_joystickAdded(joystick)</code></p>
+<h4 id="parameters_9">Parameters</h4>
+<ul>
+<li><code>joystick</code>: (love:Joystick) The joystick associated with the event.</li>
+</ul>
+<h4 id="returns_9">Returns</h4>
+<p>Nothing.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_joystickremoved">uiCall_joystickRemoved</h2>
+<p>A joystick was disconnected.</p>
+<h3 id="propagation-method_10">Propagation Method</h3>
+<p>Sent to root.</p>
+<h3 id="event-origin_10">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.joystickremoved">love.joystickremoved</a></p>
+<h3 id="signature_10">Signature</h3>
+<p><code>def:uiCall_joystickRemoved(joystick)</code></p>
+<h4 id="parameters_10">Parameters</h4>
+<ul>
+<li><code>joystick</code>: (love:Joystick) The joystick associated with the event.</li>
+</ul>
+<h4 id="returns_10">Returns</h4>
+<p>Nothing.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_update">uiCall_update</h2>
+<p>A per-frame update callback for widgets.</p>
+<h3 id="propagation-method_11">Propagation Method</h3>
+<p>Broadcast down.</p>
+<h3 id="event-origin_11">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.update">love.update</a></p>
+<h3 id="signature_11">Signature</h3>
+<p>def:uiCall_update(dt)</p>
+<h4 id="parameters_11">Parameters</h4>
+<ul>
+<li><code>dt</code>: (Number) This frame's delta time.</li>
+</ul>
+<h4 id="returns_11">Returns</h4>
+<p>True to halt event propagation to this widget's children.</p>
+<h3 id="notes">Notes</h3>
+<p>This is run in <code>prodUI.love_update()</code>, starting with <code>context.root</code> and traversing its children depth-first.</p>
+<p>Return true to explicitly prevent updating a widget's children. (If <code>uiCall_update</code> doesn't exist in the widget, children will be updated.)</p>
+<p>There are many limitations in effect when the context is locked for updating. Anything that is likely to mess up tree traversal (remove or reorder widgets; change tree root) will raise an error. You can defer these actions to after the update loop using <code>context:appendAsyncAction()</code>.</p>
+<p>Widgets may or may not have a built-in <code>uiCall_update</code> method. To run your own per-frame behavior, you can assign <code>self:userUpdate(dt)</code>, which is run before <code>uiCall_update</code>.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_windowfocus">uiCall_windowFocus</h2>
+<p>The application window focus changed.</p>
+<h3 id="propagation-method_12">Propagation Method</h3>
+<p>Sent to root.</p>
+<h3 id="event-origin_12">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.focus">love.focus</a></p>
+<h3 id="signature_12">Signature</h3>
+<p><code>def:uiCall_windowFocus(focus)</code></p>
+<h4 id="parameters_12">Parameters</h4>
+<ul>
+<li><code>focus</code>: (Boolean) True if the window has focus, false if not.</li>
+</ul>
+<h4 id="returns_12">Returns</h4>
+<p>Nothing.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_mousefocus">uiCall_mouseFocus</h2>
+<p>The application window's mouse focus changed.</p>
+<h3 id="propagation-method_13">Propagation Method</h3>
+<p>Sent to root.</p>
+<h3 id="event-origin_13">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.mousefocus">love.mousefocus</a></p>
+<h3 id="signature_13">Signature</h3>
+<p><code>def:uiCall_mouseFocus(focus)</code></p>
+<h4 id="parameters_13">Parameters</h4>
+<ul>
+<li><code>focus</code>: (Boolean) True if the window has mouse focus, false if not.</li>
+</ul>
+<h4 id="returns_13">Returns</h4>
+<p>Nothing.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_reshape">uiCall_reshape</h2>
+<p>A widget called <code>self:reshape()</code> or <code>self:reshapeDescendants()</code>.</p>
+<h3 id="propagation-method_14">Propagation Method</h3>
+<p>Broadcast down.</p>
+<h3 id="event-origin_14">Event Origin</h3>
+<ul>
+<li><code>widget:reshape()</code></li>
+<li><code>widget:reshapeDescendants()</code></li>
+</ul>
+<h3 id="signature_14">Signature</h3>
+<p><code>def:uiCall_reshape()</code></p>
+<h4 id="returns_14">Returns</h4>
+<p>True to halt event propagation.</p>
+<h3 id="notes_1">Notes</h3>
+<p>Be careful about calling <code>wid:reshape()</code> on children within <code>uiCall_reshape()</code>, since <code>wid:reshape()</code> itself can call descendants recursively.</p>
+<p>Reshaping is intended to modify a widget's content (children, minor visual details etc.), and not its current dimensions and position within its parent. There are some exceptions:</p>
+<p>1) The root widget doesn't have a parent, so it makes sense to update its dimensions to match the application window.</p>
+<p>2) You have free-floating window frames which must be clamped to their parent container, and their positions and sizes do not affect their siblings.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_initialize">uiCall_initialize</h2>
+<p>A new widget is being initialized.</p>
+<h3 id="propagation-method_15">Propagation Method</h3>
+<p>Sent to widget.</p>
+<h3 id="event-origin_15">Event Origin</h3>
+<p><code>widget:initialize()</code></p>
+<h3 id="signature_15">Signature</h3>
+<p><code>def:uiCall_initialize(...)</code></p>
+<h4 id="parameters_14">Parameters</h4>
+<ul>
+<li><code>...</code>: (Any) Arguments for the widget setup callback.</li>
+</ul>
+<h4 id="returns_15">Returns</h4>
+<p>Nothing.</p>
+<h3 id="notes_2">Notes</h3>
+<p>In your documentation, please list:</p>
+<ul>
+<li>Mandatory ahead-of-time fields</li>
+<li>Optional ahead-of-time fields</li>
+</ul>
+<p>Assume that all other fields are assigned defaults, and that the caller must set them after successful instance creation.</p>
+<p>If present, <code>self:userInitialize()</code> is run after this. (It's incredibly redundant as you have to pass it in ahead of time, but it pairs with <code>self:userDestroy()</code>.)</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_destroy">uiCall_destroy</h2>
+<p>A widget was removed from the context.</p>
+<h3 id="propagation-method_16">Propagation Method</h3>
+<p>bubbleEvent.</p>
+<h3 id="event-origin_16">Event Origin</h3>
+<p><code>widget:remove()</code></p>
+<h3 id="signature_16">Signature</h3>
+<p><code>def:uiCall_destroy(inst)</code></p>
+<h4 id="parameters_15">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+</ul>
+<h4 id="returns_16">Returns</h4>
+<p>True to halt event propagation.</p>
+<h3 id="notes_3">Notes</h3>
+<p>If present, <code>widget:userDestroy()</code> is run before this.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_pointerhoveron">uiCall_pointerHoverOn</h2>
+<p>The mouse pointer entered a widget's bounding rectangle.</p>
+<h3 id="propagation-method_17">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_17">Event Origin</h3>
+<ul>
+<li><a href="https://love2d.org/wiki/love.mousemoved">love.mousemoved</a></li>
+<li><a href="https://love2d.org/wiki/love.mousepressed">love.mousepressed</a></li>
+<li><a href="https://love2d.org/wiki/love.mousereleased">love.mousereleased</a></li>
+<li><a href="https://love2d.org/wiki/love.update">love.update</a></li>
+<li><a href="https://love2d.org/wiki/love.wheelmoved">love.wheelmoved</a></li>
+</ul>
+<h3 id="signature_17">Signature</h3>
+<p><code>def:uiCall_pointerHoverOn(inst, mouse_x, mouse_y, mouse_dx, mouse_dy)</code></p>
+<h4 id="parameters_16">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>mouse_x</code>, <code>mouse_y</code>: (Number) Mouse cursor position, relative to the application window.</li>
+<li><code>mouse_dx</code>, <code>mouse_dy</code>: (Number) Relative mouse delta from its last position, if applicable.</li>
+</ul>
+<h4 id="returns_17">Returns</h4>
+<p>True to halt event propagation.</p>
+<h3 id="notes_4">Notes</h3>
+<p>Hover events are postponed while any mouse button is held.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_pointerhoveroff">uiCall_pointerHoverOff</h2>
+<p>The mouse pointer left a widget's bounding rectangle.</p>
+<h3 id="propagation-method_18">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_18">Event Origin</h3>
+<ul>
+<li><a href="https://love2d.org/wiki/love.mousemoved">love.mousemoved</a></li>
+<li><a href="https://love2d.org/wiki/love.mousepressed">love.mousepressed</a></li>
+<li><a href="https://love2d.org/wiki/love.mousereleased">love.mousereleased</a></li>
+<li><a href="https://love2d.org/wiki/love.update">love.update</a></li>
+<li><a href="https://love2d.org/wiki/love.wheelmoved">love.wheelmoved</a></li>
+</ul>
+<h3 id="signature_18">Signature</h3>
+<p><code>def:uiCall_pointerHoverOff(inst, mouse_x, mouse_y, mouse_dx, mouse_dy)</code></p>
+<h4 id="parameters_17">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>mouse_x</code>, <code>mouse_y</code>: (Number) Mouse cursor position, relative to the application window.</li>
+<li><code>mouse_dx</code>, <code>mouse_dy</code>: (Number) Relative mouse delta from its last position, if applicable.</li>
+</ul>
+<h4 id="returns_18">Returns</h4>
+<p>True to halt event propagation.</p>
+<h3 id="notes_5">Notes</h3>
+<p>Hover events are postponed while any mouse button is held.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_pointerhover">uiCall_pointerHover</h2>
+<p>The mouse pointer is resting or moving over a widget.</p>
+<h3 id="propagation-method_19">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_19">Event Origin</h3>
+<ul>
+<li><a href="https://love2d.org/wiki/love.mousemoved">love.mousemoved</a></li>
+<li><a href="https://love2d.org/wiki/love.mousepressed">love.mousepressed</a></li>
+<li><a href="https://love2d.org/wiki/love.mousereleased">love.mousereleased</a></li>
+<li><a href="https://love2d.org/wiki/love.update">love.update</a></li>
+<li><a href="https://love2d.org/wiki/love.wheelmoved">love.wheelmoved</a></li>
+</ul>
+<h3 id="signature_19">Signature</h3>
+<p>def:uiCall_pointerHover(inst, mouse_x, mouse_y, mouse_dx, mouse_dy)</p>
+<h4 id="parameters_18">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>mouse_x</code>, <code>mouse_y</code>: (Number) Mouse cursor position, relative to the application window.</li>
+<li><code>mouse_dx</code>, <code>mouse_dy</code>: (Number) Relative mouse delta from its last position, if applicable.</li>
+</ul>
+<h4 id="returns_19">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_pointerpress">uiCall_pointerPress</h2>
+<p>The mouse cursor pressed down on a widget.</p>
+<h3 id="propagation-method_20">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_20">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.mousepressed">love.mousepressed</a></p>
+<h3 id="signature_20">Signature</h3>
+<p><code>def:uiCall_pointerPress(inst, x, y, button, istouch, presses)</code></p>
+<h4 id="parameters_19">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>x</code>, <code>y</code>: (Number) The mouse cursor position.</li>
+<li><code>button</code>: (Number) The index of the the pressed mouse button.</li>
+<li><code>istouch</code>: (Boolean) True if this is a touch event.</li>
+<li><code>presses</code>: (Number) The number of consecutive presses, as determined by <code>love.mousepressed()</code>.</li>
+</ul>
+<h4 id="returns_20">Returns</h4>
+<p>True to halt event propagation.</p>
+<h3 id="notes_6">Notes</h3>
+<p>This event does not trigger if no widget was clicked (ie the root disables mouse-hover, which in turn prevents clicking on it and all descendants).</p>
+<p>If you want to consider only one pressed button at a time, use:</p>
+<p><code>if button == self.context.mouse_pressed_button then ...</code></p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_pointerpressrepeat">uiCall_pointerPressRepeat</h2>
+<p>Called periodically after the the mouse has remained pressed on a widget for some time.</p>
+<h3 id="propagation-method_21">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_21">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.update">love.update</a></p>
+<h3 id="signature_21">Signature</h3>
+<p><code>def:uiCall_pointerPressRepeat(inst, x, y, button, istouch, reps)</code></p>
+<h4 id="parameters_20">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>x</code>, <code>y</code>: (Number) The mouse cursor position.</li>
+<li><code>button</code>: (Number) The index of the the pressed mouse button.</li>
+<li><code>istouch</code>: (Boolean) True if this is a touch event.</li>
+<li><code>reps</code>: (Number) The number of consecutive repeat events emitted up to this point, starting at 1.</li>
+</ul>
+<h4 id="returns_21">Returns</h4>
+<p>True to halt event propagation.</p>
+<h3 id="notes_7">Notes</h3>
+<p>This is a virtual event, with no equivalent LÖVE callback.</p>
+<p>This event will emit even if the pointer leaves the pressed widget's area.</p>
+<p>The initial delay and repeat-rate are controlled by the UI Context.</p>
+<p>This event will only fire in relation to the button value held in <code>self.context.mouse_pressed_button</code>, so the check suggested in <code>uiCall_pointerPress()</code> is not necessary here (but including it would cause no harm).</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_pointerrelease">uiCall_pointerRelease</h2>
+<p>The mouse cursor stopped pressing on a widget, and the cursor was within the widget's bounds.</p>
+<h3 id="propagation-method_22">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_22">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.mousereleased">love.mousereleased</a></p>
+<h3 id="signature_22">Signature</h3>
+<p><code>def:uiCall_pointerRelease(inst, x, y, button, istouch, presses)</code></p>
+<h4 id="parameters_21">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>x</code>, <code>y</code>: (Number) The mouse cursor position.</li>
+<li><code>button</code>: (Number) The index of the the pressed mouse button.</li>
+<li><code>istouch</code>: (Boolean) True if this is a touch event.</li>
+<li><code>reps</code>: (Number) The number of consecutive repeat events emitted up to this point, starting at 1.</li>
+</ul>
+<h4 id="returns_22">Returns</h4>
+<p>True to halt event propagation.</p>
+<h3 id="notes_8">Notes</h3>
+<p>This event only emits if the mouse cursor is over the widget that is designated as "currently-pressed" by the context.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_pointerunpress">uiCall_pointerUnpress</h2>
+<p>The mouse stopped pressing on a widget.</p>
+<h3 id="propagation-method_23">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_23">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.mousereleased">love.mousereleased</a></p>
+<h3 id="signature_23">Signature</h3>
+<p><code>def:uiCall_pointerUnpress(inst, x, y, button, istouch, presses)</code></p>
+<h4 id="parameters_22">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>x</code>, <code>y</code>: (Number) The mouse cursor position.</li>
+<li><code>button</code>: (Number) The index of the the pressed mouse button.</li>
+<li><code>istouch</code>: (Boolean) True if this is a touch event.</li>
+<li><code>presses</code>: (Number) The number of consecutive presses, as determined by <code>love.mousepressed()</code>.</li>
+</ul>
+<h4 id="returns_23">Returns</h4>
+<p>True to halt event propagation.</p>
+<h3 id="notes_9">Notes</h3>
+<p>This event will emit even if the mouse cursor has left the currently-pressed widget.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_pointerdrag">uiCall_pointerDrag</h2>
+<p>The mouse cursor is pressing on this widget.</p>
+<h3 id="propagation-method_24">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_24">Event Origin</h3>
+<ul>
+<li><a href="https://love2d.org/wiki/love.mousemoved">love.mousemoved</a></li>
+<li><a href="https://love2d.org/wiki/love.mousepressed">love.mousepressed</a></li>
+<li><a href="https://love2d.org/wiki/love.mousereleased">love.mousereleased</a></li>
+<li><a href="https://love2d.org/wiki/love.update">love.update</a></li>
+<li><a href="https://love2d.org/wiki/love.wheelmoved">love.wheelmoved</a></li>
+</ul>
+<h3 id="signature_24">Signature</h3>
+<p><code>def:uiCall_pointerDrag(inst, x, y, dx, dy)</code></p>
+<h4 id="parameters_23">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>x</code>, <code>y</code>: (Number) The mouse cursor position.</li>
+<li><code>dx</code>, <code>dy</code>: (Number) The mouse position's delta from the previous frame, if applicable.</li>
+</ul>
+<h4 id="returns_24">Returns</h4>
+<p>True to halt event propagation.</p>
+<h3 id="notes_10">Notes</h3>
+<p>Called on every frame.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_pointerwheel">uiCall_pointerWheel</h2>
+<p>The mouse wheel moved.</p>
+<h3 id="propagation-method_25">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_25">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.wheelmoved">love.wheelmoved</a></p>
+<h3 id="signature_25">Signature</h3>
+<p><code>def:uiCall_pointerWheel(x, y)</code></p>
+<h4 id="parameters_24">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>x</code>, <code>y</code>: (Number) The wheel's movement vector.</li>
+</ul>
+<h4 id="returns_25">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_pointerdragdeston">uiCall_pointerDragDestOn</h2>
+<p>The mouse cursor, while pressing, dragged itself onto this widget.</p>
+<h3 id="propagation-method_26">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_26">Event Origin</h3>
+<ul>
+<li><a href="https://love2d.org/wiki/love.mousemoved">love.mousemoved</a></li>
+<li><a href="https://love2d.org/wiki/love.mousepressed">love.mousepressed</a></li>
+<li><a href="https://love2d.org/wiki/love.mousereleased">love.mousereleased</a></li>
+<li><a href="https://love2d.org/wiki/love.update">love.update</a></li>
+<li><a href="https://love2d.org/wiki/love.wheelmoved">love.wheelmoved</a></li>
+</ul>
+<h3 id="signature_26">Signature</h3>
+<p><code>def:uiCall_pointerDragDestOn(inst, mouse_x, mouse_y, mouse_dx, mouse_dy)</code></p>
+<h4 id="parameters_25">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>mouse_x</code>, <code>mouse_y</code>: (Number) Mouse cursor position, relative to the application window.</li>
+<li><code>mouse_dx</code>, <code>mouse_dy</code>: (Number) Relative mouse delta from its last position, if applicable.</li>
+</ul>
+<h4 id="returns_26">Returns</h4>
+<p>True to halt event propagation.</p>
+<h3 id="notes_11">Notes</h3>
+<p>Drag-Dest events are intended to help with widget-to-widget drag-and-drop actions.</p>
+<p>The instance here is a widget that the mouse is overlapping <em>while</em> some other widget is being pressed. Think of the instance as the destination, and the <code>current_pressed</code> widget as the source.</p>
+<h4 id="more-notes">More Notes</h4>
+<ul>
+<li>
+<p>Source and destination can be the same widget.</p>
+</li>
+<li>
+<p>A reference to Source is not provided in the function arguments, but it can be found by reading <code>self.context.current_pressed</code>.</p>
+</li>
+<li>
+<p>Source could be destroyed before the drag-and-drop action is completed. Or, the circumstances could have changed. Unfortunately, you will have to do some extra work to ensure that the transaction is valid.</p>
+</li>
+</ul>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_pointerdragdestoff">uiCall_pointerDragDestOff</h2>
+<p>The mouse cursor, while pressing, moved off of this widget.</p>
+<h3 id="propagation-method_27">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_27">Event Origin</h3>
+<ul>
+<li><a href="https://love2d.org/wiki/love.mousemoved">love.mousemoved</a></li>
+<li><a href="https://love2d.org/wiki/love.mousepressed">love.mousepressed</a></li>
+<li><a href="https://love2d.org/wiki/love.mousereleased">love.mousereleased</a></li>
+<li><a href="https://love2d.org/wiki/love.update">love.update</a></li>
+<li><a href="https://love2d.org/wiki/love.wheelmoved">love.wheelmoved</a></li>
+</ul>
+<h3 id="signature_27">Signature</h3>
+<p><code>def:uiCall_pointerDragDestOff(inst, mouse_x, mouse_y, mouse_dx, mouse_dy)</code></p>
+<h4 id="parameters_26">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>mouse_x</code>, <code>mouse_y</code>: (Number) Mouse cursor position, relative to the application window.</li>
+<li><code>mouse_dx</code>, <code>mouse_dy</code>: (Number) Relative mouse delta from its last position, if applicable.</li>
+</ul>
+<h4 id="returns_27">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_pointerdragdestmove">uiCall_pointerDragDestMove</h2>
+<p>The mouse, while pressing, is currently over this widget.</p>
+<h3 id="propagation-method_28">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_28">Event Origin</h3>
+<ul>
+<li><a href="https://love2d.org/wiki/love.mousemoved">love.mousemoved</a></li>
+<li><a href="https://love2d.org/wiki/love.mousepressed">love.mousepressed</a></li>
+<li><a href="https://love2d.org/wiki/love.mousereleased">love.mousereleased</a></li>
+<li><a href="https://love2d.org/wiki/love.update">love.update</a></li>
+<li><a href="https://love2d.org/wiki/love.wheelmoved">love.wheelmoved</a></li>
+</ul>
+<h3 id="signature_28">Signature</h3>
+<p><code>def:uiCall_pointerDragDestMove(inst, mouse_x, mouse_y, mouse_dx, mouse_dy)</code></p>
+<h4 id="parameters_27">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>mouse_x</code>, <code>mouse_y</code>: (Number) Mouse cursor position, relative to the application window.</li>
+<li><code>mouse_dx</code>, <code>mouse_dy</code>: (Number) Relative mouse delta from its last position, if applicable.</li>
+</ul>
+<h4 id="returns_28">Returns</h4>
+<p>True to halt event propagation.</p>
+<h3 id="notes_12">Notes</h3>
+<p>Like <code>uiCall_pointerHover</code>, this runs even if there is no mouse movement on a given frame. It should probably be renamed.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_pointerdragdestrelease">uiCall_pointerDragDestRelease</h2>
+<p>The mouse cursor released a button while over this widget.</p>
+<h3 id="propagation-method_29">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_29">Event Origin</h3>
+<ul>
+<li><a href="https://love2d.org/wiki/love.mousemoved">love.mousemoved</a></li>
+<li><a href="https://love2d.org/wiki/love.mousepressed">love.mousepressed</a></li>
+<li><a href="https://love2d.org/wiki/love.mousereleased">love.mousereleased</a></li>
+<li><a href="https://love2d.org/wiki/love.update">love.update</a></li>
+<li><a href="https://love2d.org/wiki/love.wheelmoved">love.wheelmoved</a></li>
+</ul>
+<h3 id="signature_29">Signature</h3>
+<p><code>def:uiCall_pointerDragDestRelease(inst, x, y, button, istouch, presses)</code></p>
+<h4 id="parameters_28">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>x</code>, <code>y</code>: (Number) The mouse cursor position.</li>
+<li><code>button</code>: (Number) The index of the the pressed mouse button.</li>
+<li><code>istouch</code>: (Boolean) True if this is a touch event.</li>
+<li><code>presses</code>: (Number) The number of consecutive presses, as determined by <code>love.mousepressed()</code>.</li>
+</ul>
+<h4 id="returns_29">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_thimble1take">uiCall_thimble1Take</h2>
+<p>A widget took <code>thimble1</code>.</p>
+<h3 id="propagation-method_30">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_30">Event Origin</h3>
+<p><code>widget:takeThimble1()</code></p>
+<h3 id="signature_30">Signature</h3>
+<p><code>def:uiCall_thimble1Take(inst, a, b, c, d)</code></p>
+<h4 id="parameters_29">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>: (Any) Generic arguments which are supplied through the method that initiated the thimble handover. Usage depends on the implementation.</li>
+</ul>
+<h4 id="returns_30">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_thimble2take">uiCall_thimble2Take</h2>
+<p>A widget took <code>thimble2</code>.</p>
+<h3 id="propagation-method_31">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_31">Event Origin</h3>
+<p><code>widget:takeThimble2()</code></p>
+<h3 id="signature_31">Signature</h3>
+<p><code>def:uiCall_thimble1Take(inst, a, b, c, d)</code></p>
+<h4 id="parameters_30">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>: (Any) Generic arguments which are supplied through the method that initiated the thimble handover. Usage depends on the implementation.</li>
+</ul>
+<h4 id="returns_31">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_thimble1release">uiCall_thimble1Release</h2>
+<p>A widget released or lost <code>thimble1</code>.</p>
+<h3 id="propagation-method_32">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_32">Event Origin</h3>
+<p><code>widget:releaseThimble1()</code></p>
+<h3 id="signature_32">Signature</h3>
+<p><code>def:uiCall_thimble1Release(inst, a, b, c, d)</code></p>
+<h4 id="parameters_31">Parameters{</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>: (Any) Generic arguments which are supplied through the method that initiated the thimble handover. Usage depends on the implementation.</li>
+</ul>
+<h4 id="returns_32">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_thimble2release">uiCall_thimble2Release</h2>
+<p>A widget released thimble2.</p>
+<h3 id="propagation-method_33">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_33">Event Origin</h3>
+<ul>
+<li><code>widget:takeThimble2()</code></li>
+<li><code>widget:releaseThimble2()</code></li>
+</ul>
+<h3 id="signature_33">Signature</h3>
+<p><code>def:uiCall_thimble2Release(inst, a, b, c, d)</code></p>
+<h4 id="parameters_32">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>: (Any) Generic arguments which are supplied through the method that initiated the thimble handover. Usage depends on the implementation.</li>
+</ul>
+<h4 id="returns_33">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_thimbletoptake">uiCall_thimbleTopTake</h2>
+<p>A widget got the top thimble.</p>
+<h3 id="propagation-method_34">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_34">Event Origin</h3>
+<ul>
+<li><code>widget:takeThimble1()</code></li>
+<li><code>widget:takeThimble2()</code></li>
+<li><code>widget:releaseThimble2()</code></li>
+</ul>
+<h3 id="signature_34">Signature</h3>
+<p><code>def:uiCall_thimbleTopTake(inst, a, b, c, d)</code></p>
+<h4 id="parameters_33">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>: (Any) Generic arguments which are supplied through the method that initiated the thimble handover. Usage depends on the implementation.</li>
+</ul>
+<h4 id="returns_34">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_thimbletoprelease">uiCall_thimbleTopRelease</h2>
+<p>A widget lost the top thimble.</p>
+<h3 id="propagation-method_35">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_35">Event Origin</h3>
+<ul>
+<li><code>widget:takeThimble2()</code></li>
+<li><code>widget:releaseThimble1()</code></li>
+<li><code>widget:releaseThimble2()</code></li>
+</ul>
+<h3 id="signature_35">Signature</h3>
+<p><code>def:uiCall_thimbleTopRelease(inst, a, b, c, d)</code></p>
+<h4 id="parameters_34">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>: (Any) Generic arguments which are supplied through the method that initiated the thimble handover. Usage depends on the implementation.</li>
+</ul>
+<h4 id="returns_35">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_thimble1changed">uiCall_thimble1Changed</h2>
+<p>Emitted to the holder of <code>thimble2</code> when <code>thimble1</code> changes.</p>
+<h3 id="propagation-method_36">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_36">Event Origin</h3>
+<ul>
+<li><code>widget:takeThimble1()</code></li>
+<li><code>widget:releaseThimble1()</code></li>
+</ul>
+<h3 id="signature_36">Signature</h3>
+<p><code>def:uiCall_thimble1Changed(inst, a, b, c, d)</code></p>
+<h4 id="parameters_35">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>: (Any) Generic arguments which are supplied through the method that initiated the thimble handover. Usage depends on the implementation.</li>
+</ul>
+<h4 id="returns_36">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_thimble2changed">uiCall_thimble2Changed</h2>
+<p>Emitted to the holder of thimble1 when thimble2 changes.</p>
+<h3 id="propagation-method_37">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_37">Event Origin</h3>
+<ul>
+<li><code>widget:takeThimble2()</code></li>
+<li><code>widget:releaseThimble2()</code></li>
+</ul>
+<h3 id="signature_37">Signature</h3>
+<p><code>def:uiCall_thimble2Changed(inst, a, b, c, d)</code></p>
+<h4 id="parameters_36">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>: (Any) Generic arguments which are supplied through the method that initiated the thimble handover. Usage depends on the implementation.</li>
+</ul>
+<h4 id="returns_37">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_thimbleaction">uiCall_thimbleAction</h2>
+<p>The user pressed enter/return or space while this widget had the thimble.</p>
+<h3 id="propagation-method_38">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_38">Event Origin</h3>
+<p>WIMP Root.</p>
+<h3 id="signature_38">Signature</h3>
+<p><code>def:uiCall_thimbleAction(inst, key, scancode, isrepeat)</code></p>
+<h4 id="parameters_37">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>key</code>: (String) The key code.</li>
+<li><code>scancode</code>: (String) The keyboard scancode (maps to the classic US QWERTY keyboard layout).</li>
+<li><code>isrepeat</code>: (Boolean) True if this is a repeat key event.</li>
+</ul>
+<h4 id="returns_38">Returns</h4>
+<p>True to halt event propagation.</p>
+<h3 id="notes_13">Notes</h3>
+<p>The enter key fires repeatedly, while space only fires once per press.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_thimbleaction2">uiCall_thimbleAction2</h2>
+<p>The user pressed the Application key or Shift+F10 while a widget had the thimble.</p>
+<h3 id="propagation-method_39">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_39">Event Origin</h3>
+<p>WIMP Root</p>
+<h3 id="signature_39">Signature</h3>
+<p><code>def:uiCall_thimbleAction2(inst, key, scancode, isrepeat)</code></p>
+<h4 id="parameters_38">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>key</code>: (String) The key code.</li>
+<li><code>scancode</code>: (String) The keyboard scancode (maps to the classic US QWERTY keyboard layout).</li>
+<li><code>isrepeat</code>: (Boolean) True if this is a repeat key event.</li>
+</ul>
+<h4 id="returns_39">Returns</h4>
+<p>True to halt event propagation.</p>
+<h3 id="notes_14">Notes</h3>
+<p>Does not fire repeatedly.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_keypressed">uiCall_keyPressed</h2>
+<p>The user pressed a key while this widget had the thimble.</p>
+<h3 id="propagation-method_40">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_40">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.keypressed">love.keypressed</a></p>
+<h3 id="signature_40">Signature</h3>
+<p><code>def:uiCall_keyPressed(inst, key, scancode, isrepeat, hot_key, hot_scan)</code></p>
+<h4 id="parameters_39">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>key</code>: (String) The key code.</li>
+<li><code>scancode</code>: (String) The keyboard scancode (maps to the classic US QWERTY keyboard layout).</li>
+<li><code>isrepeat</code>: (Boolean) True if this is a repeat key event.</li>
+<li><code>hot_key</code>: (String) A hotkey string, as determined by the current pressed key combined with the state of modifier keys. This field is false when a valid hotkey string cannot be generated (the pressed key must not be a modifier).</li>
+<li><code>hot_scan</code>: (String) A hotkey string, as determined by the current pressed scancode combined with the state of modifier keys. This field is false when a valid hotkey string cannot be generated (the pressed scancode must not be a modifier).</li>
+</ul>
+<h4 id="returns_40">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_keyreleased">uiCall_keyReleased</h2>
+<p>The user released a key while this widget had the thimble.</p>
+<h3 id="propagation-method_41">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_41">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.keyreleased">love.keyreleased</a></p>
+<h3 id="signature_41">Signature</h3>
+<p><code>def:uiCall_keyReleased(inst, key, scancode)</code></p>
+<h4 id="parameters_40">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>key</code>: (String) The key code.</li>
+<li><code>scancode</code>: (String) The keyboard scancode (maps to the classic US QWERTY keyboard layout).</li>
+</ul>
+<h4 id="returns_41">Returns</h4>
+<p>True to halt event propagation.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_textinput">uiCall_textInput</h2>
+<p>The user inputted text.</p>
+<h3 id="propagation-method_42">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_42">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.textinput">love.textinput</a></p>
+<h3 id="signature_42">Signature</h3>
+<p><code>def:uiCall_textInput(inst, text)</code></p>
+<h4 id="parameters_41">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>text</code>: (String) The text.</li>
+</ul>
+<h4 id="returns_42">Returns</h4>
+<p>True to halt event propagation.</p>
+<h3 id="notes_15">Notes</h3>
+<p>This event is independent of keyboard key-down and key-up events.</p>
+<p>LÖVE text input must be enabled for this event to fire.</p>
+<p>The context checks the UTF-8 encoding of the text before invoking the event.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_filedropped">uiCall_fileDropped</h2>
+<p>The user dropped a file onto the application window.</p>
+<h3 id="propagation-method_43">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_43">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.filedropped">love.filedropped</a></p>
+<h3 id="signature_43">Signature</h3>
+<p><code>def:uiCall_fileDropped(inst, file)</code></p>
+<h4 id="parameters_42">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>file</code>: (love:DroppedFile) The file object.</li>
+</ul>
+<h4 id="returns_43">Returns</h4>
+<p>True to halt event propagation.</p>
+<h3 id="notes_16">Notes</h3>
+<p>Refer to the <a href="https://love2d.org/wiki/love.filedropped">LÖVE Wiki</a> for information on how to work with the <code>file</code> argument.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_directorydropped">uiCall_directoryDropped</h2>
+<p>The user dropped a directory onto the application window.</p>
+<h3 id="propagation-method_44">Propagation Method</h3>
+<p>cycleEvent.</p>
+<h3 id="event-origin_44">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.directorydropped">love.directorydropped</a></p>
+<h3 id="signature_44">Signature</h3>
+<p><code>def:uiCall_directoryDropped(inst, path)</code></p>
+<h4 id="parameters_43">Parameters</h4>
+<ul>
+<li><code>inst</code>: (ui:Widget) The target widget instance.</li>
+<li><code>path</code>: (String) The directory path.</li>
+</ul>
+<h4 id="returns_44">Returns</h4>
+<p>True to halt event propagation.</p>
+<h3 id="notes_17">Notes</h3>
+<p>Refer to the <a href="https://love2d.org/wiki/love.directorydropped">LÖVE Wiki</a> for information on how to work with the <code>path</code> argument.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_capture">uiCall_capture</h2>
+<p>A widget started capturing events from the context.</p>
+<h3 id="propagation-method_45">Propagation Method</h3>
+<p>sendEvent.</p>
+<h3 id="event-origin_45">Event Origin</h3>
+<p><code>widget:captureFocus()</code></p>
+<h3 id="signature_45">Signature</h3>
+<p><code>def:uiCall_capture(inst)</code></p>
+<h4 id="returns_45">Returns</h4>
+<p>Nothing.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_uncapture">uiCall_uncapture</h2>
+<p>A widget stopped capturing events from the context.</p>
+<h3 id="propagation-method_46">Propagation Method</h3>
+<p>sendEvent.</p>
+<h3 id="event-origin_46">Event Origin</h3>
+<ul>
+<li><code>widget:captureFocus()</code></li>
+<li><code>widget:uncaptureFocus()</code></li>
+</ul>
+<h3 id="signature_46">Signature</h3>
+<p><code>def:uiCall_uncapture(inst)</code></p>
+<h4 id="returns_46">Returns</h4>
+<p>Nothing.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_capturetick">uiCall_captureTick</h2>
+<p>Runs on the start of every frame when the widget is capturing events from the context.</p>
+<h3 id="propagation-method_47">Propagation Method</h3>
+<p>sendEvent.</p>
+<h3 id="event-origin_47">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.update">love.update</a></p>
+<h3 id="signature_47">Signature</h3>
+<p><code>def:uiCall_captureTick(dt)</code></p>
+<h4 id="parameters_44">Parameters</h4>
+<ul>
+<li><code>dt</code>: (Number) The delta time from <code>love.update()</code>.</li>
+</ul>
+<h4 id="returns_47">Returns</h4>
+<p>False to prevent other widgets from updating on this frame.</p>
+<!-- TODO: format later
+
+
+When a widget has captured the context/focus, the following callbacks, if present, are executed as
+prodUI events occur. The capturing widget gets first dibs on the event, and can deny the main event
+handler from acting on the event by returning a truthy value.
+
+Some of these don't make much sense — why would a capturing widget need to hijack the window
+resize event? — but are included for the sake of completeness.
+
+function def:uiCap_windowResize(w, h) — (love.resize)
+
+function def:uiCap_keyPressed(key, scancode, isrepeat, hot_kc, hot_sc)
+function def:uiCap_keyReleased(key, scancode)
+
+function def:uiCap_textEdited(text, start, length)
+function def:uiCap_textInput(text)
+
+function def:uiCap_mouseFocus(focus)
+function def:uiCap_wheelMoved(x, y)
+
+function def:uiCap_mouseMoved(x, y, dx, dy, istouch)
+^ Warning: mouse hover state is not updated automatically when this is in effect.
+
+function def:uiCap_mousePressed(x, y, button, istouch, presses)
+function def:uiCap_mouseReleased(x, y, button, istouch, presses)
+
+function def:uiCap_virtualMouseRepeat(x, y, button, istouch, reps)
+
+function def:uiCap_windowFocus(focus)
+function def:uiCap_mouseFocus(focus)
+
+function def:uiCap_windowVisible(visible)
+
+function def:uiCap_joystickAdded(joystick)
+function def:uiCap_joystickRemoved(joystick)
+function def:uiCap_joystickPressed(joystick, button)
+function def:uiCap_joystickReleased(joystick, button)
+function def:uiCap_joystickAxis(joystick, axis, value)
+function def:uiCap_joystickHat(joystick, hat, direction)
+
+function def:uiCap_gamepadPressed(joystick, button)
+function def:uiCap_gamepadReleased(joystick, button)
+function def:uiCap_gamepadAxis(joystick, axis, value)
+-->
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../widget_event_callbacks/" class="btn btn-neutral float-left" title="Widgets"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../wimp_interface/" class="btn btn-neutral float-right" title="WIMP Interface">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../widget_event_callbacks/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../wimp_interface/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
