@@ -1,2 +1,5 @@
 # Kate (text editor) swap files
 *.kate-swp
+
+# gh-pages content
+/site
