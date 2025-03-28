@@ -4,7 +4,7 @@ ProdUI uses a basic form of inheritance to provide methods to widgets. When an i
 
 * Itself
 * Its widget definition
-* _mt_widget, the base table for all widgets
+* `_mt_widget`, the base table for all widgets
 
 This is implemented with Lua's built-in `__index` metamethod. Further subclassing is not supported.
 
@@ -39,7 +39,7 @@ Typically, the first argument after `self` is the original calling instance. Wid
 
 Propagation is halted as soon as a widget returns a value that evaluates to true.
 
-You can use `if self == inst then...` to differentiate between events acting on `self`, or events bubbled up from a descendant. Trickle event callbacks never run directly on targets.
+You can use `if self == inst then...` to differentiate between events acting on `self`, or events bubbled up from a descendant.
 
 
 ## The UI Thimble
