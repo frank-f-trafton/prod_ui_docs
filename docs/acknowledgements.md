@@ -17,7 +17,7 @@
 
 ## Concepts
 
-* The concept of widget event bubbling and trickling is taken from [LUIGI](http://airstruck.github.io/luigi/doc/classes/Widget.html#Widget:bubbleEvent).
+* Widget event bubbling and trickling was taken from [LUIGI](http://airstruck.github.io/luigi/doc/classes/Widget.html#Widget:bubbleEvent). I refined my implementation after reading [this LÖVE forum thread](https://love2d.org/forums/viewtopic.php?p=261656).
 
 * Some tree traversal code, including the function to get the "last" descendant in a tree, is taken from [LUIGI](https://github.com/airstruck/luigi/blob/gh-pages/luigi/widget.lua#L375).
 
@@ -43,4 +43,6 @@
 
 ## Thanks
 
-* Thanks to Pedro Gimeno for [this tip on premultiplied alpha](https://love2d.org/forums/viewtopic.php?p=254694#p254694).
+* Pedro Gimeno, for [this tip on premultiplied alpha](https://love2d.org/forums/viewtopic.php?p=254694#p254694).
+
+* Nik Barker: [How Clay's UI Layout Algorithm Works](https://www.youtube.com/watch?v=by9lQvpvMIc) (video)
