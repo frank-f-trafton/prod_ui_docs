@@ -1740,6 +1740,32 @@ sendEvent.
 False to prevent other widgets from updating on this frame.
 
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+## uiCall_quit
+
+Runs on the root widget when the application is quitting.
+
+
+### Propagation Method
+
+sendEvent.
+
+
+### Event Origin
+
+[love.quit](https://love2d.org/wiki/love.quit)
+
+
+### Signature
+
+`def:uiCall_quit()`
+
+
+#### Returns
+
+True to prevent the application from quitting.
+
+
 <!-- TODO: format later
 
 
@@ -1784,4 +1810,6 @@ function def:uiCap_joystickHat(joystick, hat, direction)
 function def:uiCap_gamepadPressed(joystick, button)
 function def:uiCap_gamepadReleased(joystick, button)
 function def:uiCap_gamepadAxis(joystick, axis, value)
+
+function def:uiCap_quit()
 -->
