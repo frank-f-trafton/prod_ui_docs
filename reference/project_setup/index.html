@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Menus - ProdUI (Beta) Documentation</title>
+    <title>Project Setup - ProdUI (Beta) Documentation</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Menus";
-        var mkdocs_page_input_path = "reference/menus.md";
+        var mkdocs_page_name = "Project Setup";
+        var mkdocs_page_input_path = "reference/project_setup.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -61,13 +61,13 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../layout/">Layout</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Menus</a>
-    <ul class="current">
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../menus/">Menus</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mouse_cursor/">Mouse Cursor State</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../project_setup/">Project Setup</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Project Setup</a>
+    <ul class="current">
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../reshaping/">Reshaping</a>
                   </li>
@@ -222,7 +222,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
           <li class="breadcrumb-item">Reference</li>
-      <li class="breadcrumb-item active">Menus</li>
+      <li class="breadcrumb-item active">Project Setup</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -231,32 +231,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="menus">Menus</h1>
-<p>Menu items are contained in the array <code>self.items</code>. Each item is a table, and the menu checks the following variables when making selections:</p>
-<ul>
-<li><code>item.selectable</code> (boolean): This item can be selected by a menu cursor.</li>
-<li>When moving the cursor, non-selectable items are skipped.</li>
-<li>
-<p>If no items are selectable, then the selection index is 0 (no selection).</p>
-</li>
-<li>
-<p><code>self.default_deselect</code> (boolean): When true, the default menu item is nothing (index 0).</p>
-</li>
-<li>
-<p><code>item.is_default_selection</code> (boolean): The item to select by default, if <code>self.default_deselect</code> is false.</p>
-</li>
-<li>When multiple items have this set, the first such item that is selectable is chosen.</li>
-<li>If no item has this set, then the default is the first selectable item (or if there are no selectable items, then the cursor is set to no selection.)</li>
-</ul>
-<p>The main selection is tracked in <code>self.index</code>. Additional indices can be used by passing in different <code>id</code> keys to menu methods. <code>self.index</code> gets "camera priority" by higher-level logic.</p>
-<p>Arbitrary multiple selection is implemented by setting the field <code>marked</code> on a per-item basis. Not all menu widgets support multiple selection.</p>
-<p>When creating a menu structure, the library user can provide an existing table of items (for example, a widget's array of child widgets).</p>
+                <h1 id="project-setup">Project Setup</h1>
+<p>Disable LÖVE Text input.</p>
+<pre><code class="language-lua">love.keyboard.setTextInput(false)
+</code></pre>
+<p>Text input should not be changed by user code while the ProdUI context is active. Widgets will toggle text input on and off as they take and release keyboard focus. If left on all the time, there is a chance that keystrokes will generate conflicting <code>keypressed</code> and <code>textinput</code> events.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../layout/" class="btn btn-neutral float-left" title="Layout"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../mouse_cursor/" class="btn btn-neutral float-right" title="Mouse Cursor State">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../mouse_cursor/" class="btn btn-neutral float-left" title="Mouse Cursor State"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../reshaping/" class="btn btn-neutral float-right" title="Reshaping">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -279,10 +264,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../layout/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../mouse_cursor/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../mouse_cursor/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../reshaping/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

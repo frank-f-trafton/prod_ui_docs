@@ -65,6 +65,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../mouse_cursor/">Mouse Cursor State</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../project_setup/">Project Setup</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../reshaping/">Reshaping</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../scrolling/">Scrolling</a>
@@ -879,7 +881,23 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uicall_quit">uiCall_quit</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propagation-method_48">Propagation Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#event-origin_48">Event Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signature_48">Signature</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#returns_48">Returns</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
     </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../widgets/">Widgets</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../wimp_interface/">WIMP Interface</a>
                   </li>
@@ -1999,6 +2017,17 @@
 </ul>
 <h4 id="returns_47">Returns</h4>
 <p>False to prevent other widgets from updating on this frame.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="uicall_quit">uiCall_quit</h2>
+<p>Runs on the root widget when the application is quitting.</p>
+<h3 id="propagation-method_48">Propagation Method</h3>
+<p>sendEvent.</p>
+<h3 id="event-origin_48">Event Origin</h3>
+<p><a href="https://love2d.org/wiki/love.quit">love.quit</a></p>
+<h3 id="signature_48">Signature</h3>
+<p><code>def:uiCall_quit()</code></p>
+<h4 id="returns_48">Returns</h4>
+<p>True to prevent the application from quitting.</p>
 <!-- TODO: format later
 
 
@@ -2043,13 +2072,15 @@ function def:uiCap_joystickHat(joystick, hat, direction)
 function def:uiCap_gamepadPressed(joystick, button)
 function def:uiCap_gamepadReleased(joystick, button)
 function def:uiCap_gamepadAxis(joystick, axis, value)
+
+function def:uiCap_quit()
 -->
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../widget_event_callbacks/" class="btn btn-neutral float-left" title="Widgets"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../wimp_interface/" class="btn btn-neutral float-right" title="WIMP Interface">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../widgets/" class="btn btn-neutral float-right" title="Widgets">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -2075,7 +2106,7 @@ function def:uiCap_gamepadAxis(joystick, axis, value)
       <span><a href="../widget_event_callbacks/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../wimp_interface/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../widgets/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

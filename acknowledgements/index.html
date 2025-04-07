@@ -75,6 +75,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../reference/mouse_cursor/">Mouse Cursor State</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../reference/project_setup/">Project Setup</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../reference/reshaping/">Reshaping</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../reference/scrolling/">Scrolling</a>
@@ -86,6 +88,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../reference/widget_event_callbacks/">Widgets</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../reference/widget_events/">Widget Events</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../reference/widgets/">Widgets</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../reference/wimp_interface/">WIMP Interface</a>
                   </li>
@@ -259,7 +263,7 @@
 <h2 id="concepts">Concepts</h2>
 <ul>
 <li>
-<p>The concept of widget event bubbling and trickling is taken from <a href="http://airstruck.github.io/luigi/doc/classes/Widget.html#Widget:bubbleEvent">LUIGI</a>.</p>
+<p>Widget event bubbling and trickling was taken from <a href="http://airstruck.github.io/luigi/doc/classes/Widget.html#Widget:bubbleEvent">LUIGI</a>. I refined my implementation after reading <a href="https://love2d.org/forums/viewtopic.php?p=261656">this LÖVE forum thread</a>.</p>
 </li>
 <li>
 <p>Some tree traversal code, including the function to get the "last" descendant in a tree, is taken from <a href="https://github.com/airstruck/luigi/blob/gh-pages/luigi/widget.lua#L375">LUIGI</a>.</p>
@@ -296,7 +300,12 @@
 </ul>
 <h2 id="thanks">Thanks</h2>
 <ul>
-<li>Thanks to Pedro Gimeno for <a href="https://love2d.org/forums/viewtopic.php?p=254694#p254694">this tip on premultiplied alpha</a>.</li>
+<li>
+<p>Pedro Gimeno, for <a href="https://love2d.org/forums/viewtopic.php?p=254694#p254694">this tip on premultiplied alpha</a>.</p>
+</li>
+<li>
+<p>Nik Barker: <a href="https://www.youtube.com/watch?v=by9lQvpvMIc">How Clay's UI Layout Algorithm Works</a> (video)</p>
+</li>
 </ul>
               
             </div>
