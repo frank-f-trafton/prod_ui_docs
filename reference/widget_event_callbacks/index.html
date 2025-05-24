@@ -53,6 +53,8 @@
               </ul>
               <p class="caption"><span class="caption-text">Reference</span></p>
               <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../context/">Context</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../context_callbacks/">Context Callbacks</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../installation/">Installation</a>
@@ -267,11 +269,21 @@
 <p>This is implemented with Lua's built-in <code>__index</code> metamethod. Further subclassing is not supported.</p>
 <p>All widgets are axis aligned rectangles, even if they are invisible and appear formless in UI space.</p>
 <h2 id="event-dispatch">Event Dispatch</h2>
-<p>ProdUI supports four forms of event dispatch:
-  * <code>self:sendEvent()</code>: Just query <code>self</code>.
-  * <code>self:bubbleEvent()</code>: Ascend from the target widget to the root.
-  * <code>self:trickleEvent()</code>: Descend from the root to the target widget.
-  * <code>self:cycleEvent()</code>: Trickle down, then bubble up.</p>
+<p>ProdUI supports four forms of event dispatch:</p>
+<ul>
+<li>
+<p><code>self:sendEvent()</code>: Just query <code>self</code>.</p>
+</li>
+<li>
+<p><code>self:bubbleEvent()</code>: Ascend from the target widget to the root.</p>
+</li>
+<li>
+<p><code>self:trickleEvent()</code>: Descend from the root to the target widget.</p>
+</li>
+<li>
+<p><code>self:cycleEvent()</code>: Trickle down, then bubble up.</p>
+</li>
+</ul>
 <p>The main event callbacks are attached to its indexed metatable, like this:</p>
 <pre><code class="language-lua">function def:uiCall_keyPressed(inst, key, scancode, isrepeat)
 </code></pre>
@@ -286,14 +298,14 @@
 <h2 id="the-ui-thimble">The UI Thimble</h2>
 <p>"Thimble" is an arbitrary term for which widget currently has focus. The name is unlikely to be mistaken for other kinds of focus: OS window focus, in-application frame focus, mouse hover + press state, selections within menus, and so on. Generally, the widget which has the thimble is also the target for keyboard input.</p>
 <p>Lamentably, there are two thimbles: <code>thimble1</code> and <code>thimble2</code>. The first is for "concrete" widgets, while the second is for "ephemeral" components like pop-up menus. The <em>Top Thimble</em> is the highest one that is currently assigned to a widget:</p>
-<pre><code>+--------------------------------------------+
-| thimble1 | thimble2 | Top Thimble is...    |
-+----------+----------+----------------------+
-|          |          | Neither              |
-|    x     |          | thimble1             |
-|          |    x     | thimble2             |
-|    x     |    x     | thimble2             |
-+--------------------------------------------+
+<pre><code> +--------------------------------------------+
+ | thimble1 | thimble2 | Top Thimble is...    |
+ +----------+----------+----------------------+
+ |          |          | Neither              |
+ |    x     |          | thimble1             |
+ |          |    x     | thimble2             |
+ |    x     |    x     | thimble2             |
+ +--------------------------------------------+
 </code></pre>
 <p>This system, confusing as it is, allows a concrete widget to know that it is still selected, even if key events are temporarily directed to an ephemeral widget.</p>
 <h2 id="a-note-on-capturing">A Note on "Capturing"</h2>

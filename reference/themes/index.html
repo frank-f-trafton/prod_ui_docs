@@ -53,6 +53,8 @@
               </ul>
               <p class="caption"><span class="caption-text">Reference</span></p>
               <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../context/">Context</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../context_callbacks/">Context Callbacks</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../installation/">Installation</a>
@@ -73,13 +75,31 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Themes</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#theme-components">Theme Components</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#boxes">Boxes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#fonts">Fonts</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#info">Info</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#info-thimble_info">Info: thimble_info</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#info-window_frames">Info: window_frames</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#labels">Labels</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#scroll-bar-data">Scroll Bar Data</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#scroll-bar-styles">Scroll Bar Styles</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#skins">Skins</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#resource-management">Resource Management</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#marking-resources-for-transformation">Marking resources for transformation</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#box-styles">Box Styles</a>
+    <li class="toctree-l2"><a class="reference internal" href="#textures">Textures</a>
     </li>
     </ul>
                   </li>
@@ -240,36 +260,185 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="themes">Themes</h1>
-<h2 id="skins">Skins</h2>
-<p>Widgets can be customized with the skinning system.</p>
-<p>Skinners provide the rendering implementation; skins provide skinners with data.</p>
-<h2 id="resource-management">Resource Management</h2>
-<p>Skinners are stored in the context and skins are kept in the theme instance. The library user is responsible for removing unneeded ad hoc skins so that they can be deleted by the garbage collector.</p>
-<h2 id="marking-resources-for-transformation">Marking resources for transformation</h2>
-<p>Skinners include a schema table which controls which values in a skin are scaled, floored, clamped, and so on.</p>
-<pre><code class="language-lua">schema = {
-    foo = &quot;scaled-int&quot;, -- scale and floor the value
-    bar = &quot;unit-interval&quot; -- clamp the value from 0.0 to 1.0
-}
-</code></pre>
-<p>Skin values can be references to data in the main resources table. They are pulled in whenever the skin is refreshed.</p>
-<pre><code class="language-lua">    foobar = &quot;*path/to/foo&quot; -- pulls in the value at 'resources.path.to.foo'
-</code></pre>
-<h2 id="box-styles">Box Styles</h2>
+<p>Themes define the UI's general look.</p>
+<p>A ProdUI theme is a plain hierchical table of settings and references to other data. When applied, its contents are vetted and then transferred to the UI Context.</p>
+<p>ProdUI ships with a default theme at <code>prod_ui/theme</code>, which can be loaded as a table with <code>uiRes.loadDirectoryAsTable()</code>. The result can be patched by mounting ZIP files on top of the theme's path. Or, you could make changes to the theme after loading it (and before applying it).</p>
+<h2 id="theme-components">Theme Components</h2>
+<h3 id="boxes">Boxes</h3>
+<p>TODO: Rename to edges?</p>
+<p>Location: <code>theme/boxes</code></p>
+<p>Maps to: <code>context.resources.boxes</code></p>
+<p>Boxes provide common measurements for borders, margins and padding in widget skins.</p>
 <p>Fields:</p>
 <ul>
-<li>
-<p><code>sl_body_id</code>: The ID of a 9-Slice texture which should be rendered with the box. Used to unify the look of panels and context menus. Not all boxes include this field.</p>
-</li>
 <li>
 <p><code>outpad {x1, y1, x2, y2}</code>: The intended amount of outer padding around the box. Sometimes used by the layout system. Does not affect the widget's width and height directly. Similar to "margin" in HTML/CSS.</p>
 </li>
 <li>
-<p><code>border {x1, y1, x2, y2}</code>: A border that starts at the widget's edge and grows inward. Usually precludes scroll bars, and may be used to designate a widget's draggable edges. Similar to "border" in HTML/CSS.</p>
+<p><code>border {x1, y1, x2, y2}</code>: An inward border that starts at the widget's edge. Usually precludes scroll bars, and may be used to designate a widget's draggable edges. Similar to "border" in HTML/CSS.</p>
 </li>
 <li>
-<p><code>margin {x1, y1, x2, y2}</code>: Inner padding which begins at the border and grows inward. Similar to "padding" in HTML/CSS.</p>
+<p><code>margin {x1, y1, x2, y2}</code>: Inward padding which begins at the border. Similar to "padding" in HTML/CSS.</p>
 </li>
+</ul>
+<h3 id="fonts">Fonts</h3>
+<p>Location: <code>theme/fonts</code></p>
+<p>Maps to: <code>context.resources.fonts</code> (as LÖVE Fonts)</p>
+<p>Paths and settings for LÖVE Fonts.</p>
+<p>Fields (Vector Fonts):</p>
+<ul>
+<li>
+<p><code>path</code>: The path to the font file, or <code>default</code> to use LÖVE's built-in Font.</p>
+</li>
+<li>
+<p><code>size</code>: The font's size.</p>
+</li>
+<li>
+<p><code>[fallbacks]</code>: An optional array of fallback font information:</p>
+<ul>
+<li>
+<p><code>path</code>: The path to the fallback font.</p>
+</li>
+<li>
+<p><code>size</code>: The fallback font's size. (This should almost always match the main font's size.)</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>TODO: BMFont, ImageFont stuff</p>
+<h3 id="info">Info</h3>
+<p>Location: <code>theme/info</code></p>
+<p>Maps to: <code>context.resources.info</code></p>
+<p>Info is a miscellaneous collection of settings.</p>
+<h4 id="info-thimble_info">Info: thimble_info</h4>
+<p>Contains parameters for how the "thimble" (widget keyboard focus) is represented.</p>
+<p>TODO</p>
+<h4 id="info-window_frames">Info: window_frames</h4>
+<p>Contains parameters for Window Frames.</p>
+<p>TODO</p>
+<h3 id="labels">Labels</h3>
+<p>Location: <code>theme/labels</code></p>
+<p>Maps to: <code>context.resources.labels</code></p>
+<p>Text label styles for widgets.</p>
+<p>Fields:</p>
+<ul>
+<li>
+<p><code>font</code>: The Font ID to use when measuring and rendering label text.</p>
+</li>
+<li>
+<p><code>ul_color</code>: An independent underline color (in the form of {R, G, B, A}), or false to use the text color.</p>
+</li>
+<li>
+<p><code>ul_h</code>: Underline height or thickness.</p>
+</li>
+</ul>
+<h2 id="scroll-bar-data">Scroll Bar Data</h2>
+<p>Location: <code>theme/scroll_bar_data</code></p>
+<p>Maps to: <code>context.resources.scroll_bar_data</code></p>
+<p>Contains texture references, colors, and some settings for widget scroll bars.</p>
+<p>Fields:</p>
+<ul>
+<li>
+<p><code>tquad_pixel</code>: Quad reference for a single white pixel. Used when drawing flat rectangles.</p>
+</li>
+<li>
+<p><code>tq_arrow_down</code>, <code>tq_arrow_up</code>, <code>tq_arrow_left</code>, <code>tq_arrow_right</code>: Quad references for the arrow graphics on the scroll buttons.</p>
+</li>
+<li>
+<p><code>render_body</code>: (Boolean) When true, the entire scroll bar body is drawn. Could be helpful if the buttons and trough do not fit snugly into the scroll bar's rectangular body.</p>
+</li>
+<li>
+<p><code>body_color</code>: (Color tuple) The body's color.</p>
+</li>
+<li>
+<p><code>col_trough</code>: (Color tuple) The trough's color.</p>
+</li>
+<li>
+<p><code>shared</code>: A table of sub-settings for the following states: <code>idle</code>, <code>hover</code>, <code>press</code> and <code>disabled</code>:</p>
+<ul>
+<li>
+<p><code>slice</code>: A slice reference for the scroll bar's thumb and buttons (one slice for both entities).</p>
+</li>
+<li>
+<p><code>col_body</code>: The color for the thumb and buttons.</p>
+</li>
+<li>
+<p><code>col_symbol</code>: The color for the arrow symbols on the buttons.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="scroll-bar-styles">Scroll Bar Styles</h2>
+<p>Location: <code>theme/scroll_bar_styles</code></p>
+<p>Maps to: <code>context.resources.scroll_bar_styles</code></p>
+<p>Style settings for widget scroll bars.</p>
+<p>Fields:</p>
+<ul>
+<li>
+<p><code>has_buttons</code>: (Boolean) True if the scroll bars have buttons on the ends, which may be clicked to scroll the document in small increments.</p>
+</li>
+<li>
+<p><code>trough_enabled</code>: (Boolean) True if the scroll bars have a clickable trough.</p>
+</li>
+<li>
+<p><code>thumb_enabled</code>: (Boolean) True if the scroll bars have a clickable thumb.</p>
+</li>
+<li>
+<p><code>bar_size</code>: The width of vertical scroll bars; the height of horizontal scroll bars.</p>
+</li>
+<li><code>button_size</code>: The desired height of buttons on vertical scroll bars; the desired width of buttons on horizontal scroll bars. (Buttons may be squished if there is not enough room.)</li>
+<li>
+<p><code>thumb_size_min</code>, <code>thumb_size_max</code>: The minimum and maximum length of the scroll bar thumb.</p>
+</li>
+<li>
+<p><code>v_near_side</code>: (Boolean) Controls where vertical scroll bars are placed. true: right, false: left.</p>
+</li>
+<li>
+<p><code>v_auto_hide</code>: (Boolean) When true, the vertical scroll bar is hidden when the viewport is large enough to show the document lengthwise.</p>
+</li>
+<li>
+<p><code>v_button1_enabled</code>: (Boolean) True if the "up" button is enabled. (<code>has_buttons</code> must also be true).</p>
+</li>
+<li>
+<p><code>v_button1_mode</code>: How the button scrolls when clicked. (TODO: elaborate.)</p>
+</li>
+<li>
+<p><code>v_button2_enabled</code>: (Boolean) True if the "down" button is enabled. (<code>has_buttons</code> must also be true).</p>
+</li>
+<li>
+<p><code>v_button2_mode</code>: How the button scrolls when clicked. (TODO: elaborate.)</p>
+</li>
+<li>
+<p><code>h_near_side</code>: (Boolean) Controls where horitonzal scroll bars are placed. true: top, false: bottom.</p>
+</li>
+<li>
+<p><code>h_auto_hide</code>: (Boolean) When true, the horizontal scroll bar is hidden when the viewport is large enough to show the document widthwise.</p>
+</li>
+<li>
+<p><code>h_button1_enabled</code>: (Boolean) True if the "left" button is enabled. (<code>has_buttons</code> must also be true).</p>
+</li>
+<li>
+<p><code>h_button1_mode</code>: How the button scrolls when clicked. (TODO: elaborate.)</p>
+</li>
+<li>
+<p><code>h_button2_enabled</code>: (Boolean) True if the "right" button is enabled. (<code>has_buttons</code> must also be true).</p>
+</li>
+<li>
+<p><code>h_button2_mode</code>: How the button scrolls when clicked. (TODO: elaborate.)</p>
+</li>
+</ul>
+<h2 id="skins">Skins</h2>
+<p>Location: <code>theme.skins</code></p>
+<p>Maps to: <code>context.resources.skins</code></p>
+<p>Skins control the overall look of widgets.</p>
+<p><em>Skinners</em> are the rendering implementation; <em>skins</em> provide skinners with data.</p>
+<h2 id="textures">Textures</h2>
+<p>Location: <code>theme.textures</code></p>
+<p>Maps to: <code>context.resources.textures</code></p>
+<p>Links textures to the theme.</p>
+<p>Fields:</p>
+<ul>
+<li><code>path</code>: The path to the texture.</li>
 </ul>
               
             </div>
