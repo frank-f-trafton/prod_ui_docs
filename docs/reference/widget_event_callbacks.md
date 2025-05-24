@@ -14,10 +14,14 @@ All widgets are axis aligned rectangles, even if they are invisible and appear f
 ## Event Dispatch
 
 ProdUI supports four forms of event dispatch:
-  * `self:sendEvent()`: Just query `self`.
-  * `self:bubbleEvent()`: Ascend from the target widget to the root.
-  * `self:trickleEvent()`: Descend from the root to the target widget.
-  * `self:cycleEvent()`: Trickle down, then bubble up.
+
+* `self:sendEvent()`: Just query `self`.
+
+* `self:bubbleEvent()`: Ascend from the target widget to the root.
+
+* `self:trickleEvent()`: Descend from the root to the target widget.
+
+* `self:cycleEvent()`: Trickle down, then bubble up.
 
 The main event callbacks are attached to its indexed metatable, like this:
 
@@ -49,14 +53,14 @@ You can use `if self == inst then...` to differentiate between events acting on 
 Lamentably, there are two thimbles: `thimble1` and `thimble2`. The first is for "concrete" widgets, while the second is for "ephemeral" components like pop-up menus. The *Top Thimble* is the highest one that is currently assigned to a widget:
 
 ```
-+--------------------------------------------+
-| thimble1 | thimble2 | Top Thimble is...    |
-+----------+----------+----------------------+
-|          |          | Neither              |
-|    x     |          | thimble1             |
-|          |    x     | thimble2             |
-|    x     |    x     | thimble2             |
-+--------------------------------------------+
+ +--------------------------------------------+
+ | thimble1 | thimble2 | Top Thimble is...    |
+ +----------+----------+----------------------+
+ |          |          | Neither              |
+ |    x     |          | thimble1             |
+ |          |    x     | thimble2             |
+ |    x     |    x     | thimble2             |
+ +--------------------------------------------+
 ```
 
 This system, confusing as it is, allows a concrete widget to know that it is still selected, even if key events are temporarily directed to an ephemeral widget.

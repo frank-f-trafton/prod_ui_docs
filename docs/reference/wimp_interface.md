@@ -31,5 +31,4 @@ A [Workspace](../widgets/wimp/workspace.md) fills most (or all) of the applicati
 
 * **Workspace association**: When a Workspace is dormant, so too are any of its associated Window Frames. A Window Frame that is *unassociated* will appear even if no Workspace is active.
 
-* **Hidden**: Active Window Frames can be placed out of sight while still running.
-
+* **Hidden**: Active Window Frames can be made invisible (and denied user input events) while still running.

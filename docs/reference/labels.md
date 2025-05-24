@@ -44,8 +44,6 @@ The main label implementation.
 
   * `.ul_h`: Underline height (thickness).
 
-  * `.ul_oy`: Underline Y offset from the top of text.
-
 
 ### Methods
 
