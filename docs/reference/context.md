@@ -15,4 +15,3 @@ Some functions can interpolate symbols into paths. The symbol `%produi%` is buil
 ### Warning
 
 The editing of paths should happen before any resources are loaded, probably just after making the context. Changing paths after anything has been instantiated will cause problems.
-

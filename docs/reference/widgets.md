@@ -8,7 +8,7 @@ Most widgets fall under one of the following broad categories:
 
 * Containers (of other widgets)
 
-* Informational or cosmetic elements, like this text
+* Informational or cosmetic elements, like text labels
 
 
 ## Root Widget

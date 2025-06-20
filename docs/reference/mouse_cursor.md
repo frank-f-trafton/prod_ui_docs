@@ -15,7 +15,7 @@ The populated field with the lowest priority is selected.
 
 ## Cursor IDs
 
-The default cursor IDs are pulled from LÖVE's [built-in hardware cursors](https://love2d.org/wiki/CursorType). ProdUI includes an invisible cursor with the ID `nothing`; this is easier to use within widget code, versus trying to control the application-wide mouse visibility state.
+The default cursor IDs are pulled from LÖVE's [built-in hardware cursors](https://love2d.org/wiki/CursorType). ProdUI includes an invisible cursor with the ID `nothing`.
 
 * `arrow`
 * `crosshair`

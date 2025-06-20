@@ -2,28 +2,28 @@
 
 ProdUI uses a basic form of inheritance to provide methods to widgets. When an instance calls a method, it checks:
 
-* Itself
-* Its widget definition
-* `_mt_widget`, the base table for all widgets
+1. Itself
+2. Its widget definition
+3. `_mt_widget`, the base table for all widgets
 
 This is implemented with Lua's built-in `__index` metamethod. Further subclassing is not supported.
 
-All widgets are axis aligned rectangles, even if they are invisible and appear formless in UI space.
+All widgets are axis aligned rectangles.
 
 
 ## Event Dispatch
 
 ProdUI supports four forms of event dispatch:
 
-* `self:sendEvent()`: Just query `self`.
+* `self:sendEvent()`: Just queries `self`.
 
-* `self:bubbleEvent()`: Ascend from the target widget to the root.
+* `self:bubbleEvent()`: Ascends from the target widget to the root.
 
-* `self:trickleEvent()`: Descend from the root to the target widget.
+* `self:trickleEvent()`: Descends from the root to the target widget.
 
-* `self:cycleEvent()`: Trickle down, then bubble up.
+* `self:cycleEvent()`: Trickles down, then bubbles up.
 
-The main event callbacks are attached to its indexed metatable, like this:
+The main event callbacks are attached to the widget's indexed metatable, like this:
 
 ```lua
 function def:uiCall_keyPressed(inst, key, scancode, isrepeat)
@@ -39,18 +39,18 @@ function def.trickle:uiCall_keyPressed(inst, key, scancode, isrepeat)
 
 Note that the colon syntax is misleading here: we always call the function on the widget table directly, never on `wid.trickle`. Colon syntax is used only to maintain argument parity with the main callbacks in the source code (so that we don't have to add or remove 'self' when moving code snippets back and forth).
 
-Typically, the first argument after `self` is the original calling instance. Widgets that do not have the relevant field are ignored.
+Typically, the first argument after `self` is the original calling instance (`inst`).
 
 Propagation is halted as soon as a widget returns a value that evaluates to true.
 
-You can use `if self == inst then...` to differentiate between events acting on `self`, or events bubbled up from a descendant.
+You can use `if self == inst then...` to differentiate between events acting on `self` and events that originate from an ancestor or a descendant.
 
 
 ## The UI Thimble
 
 "Thimble" is an arbitrary term for which widget currently has focus. The name is unlikely to be mistaken for other kinds of focus: OS window focus, in-application frame focus, mouse hover + press state, selections within menus, and so on. Generally, the widget which has the thimble is also the target for keyboard input.
 
-Lamentably, there are two thimbles: `thimble1` and `thimble2`. The first is for "concrete" widgets, while the second is for "ephemeral" components like pop-up menus. The *Top Thimble* is the highest one that is currently assigned to a widget:
+Lamentably, there are two thimbles: `thimble1` and `thimble2`. The first is for "concrete" widgets, while the second is for "ephemeral" components, like pop-up menus. The *Top Thimble* is the highest one that is currently assigned to a widget:
 
 ```
  +--------------------------------------------+
@@ -63,7 +63,7 @@ Lamentably, there are two thimbles: `thimble1` and `thimble2`. The first is for 
  +--------------------------------------------+
 ```
 
-This system, confusing as it is, allows a concrete widget to know that it is still selected, even if key events are temporarily directed to an ephemeral widget.
+This system, unintuitive as it is, allows a concrete widget to know that it is still selected, even if key events are temporarily directed to an ephemeral widget.
 
 
 ## A Note on "Capturing"
@@ -85,7 +85,7 @@ These fields are reserved by ProdUI in widget tables.
 
 `usr_*`: Arbitrary user (application developer) variables
 
-`vp_*`: Viewport data (See: Widget Viewports)
+`vp_*`, `vp#_*`: Viewport data (See: Widget Viewports)
 
 
 ### Fields with base widget metatable dummy values
@@ -132,15 +132,15 @@ These fields are reserved by ProdUI in widget tables.
 
 ### Fields applicable to widgets with children
 
-`hide_children`: When truthy, children are not rendered.
+`hide_children`: When true, children are not rendered.
 
 `clip_scissor`: When true, rendering of children is clipped to the widget's body. When "manual", the scissor region is specified in 'clip_scissor_x', 'clip_scissor_y', 'clip_scissor_w', and 'clip_scissor_h', relative to the top-left of the widget.
 
 NOTE: don't use math.huge with setScissor or intersectScissor. It will become zero. -2^16 and 2^17 seem OK.
 
-`clip_hover`: When true, mouse hover and click detection against children is clipped to the widget's body. When "manual", the clipping region is specified in 'clip_hover_x', 'clip_hover_y', 'clip_hover_w' and 'clip_hover_h'.
+`clip_hover`: When true, mouse hover and click detection against children are clipped to the widget's body. When "manual", the clipping region is specified in 'clip_hover_x', 'clip_hover_y', 'clip_hover_w' and 'clip_hover_h'.
 
-`_no_descendants`: When true, upon widget creation, a special shared table is assigned to self.children. This table raises an error if self:addChild() is used, or if anything assigns a new field via __newindex.
+`_no_descendants`: When true, upon widget creation, a special shared table is assigned to 'self.children'. This table raises an error if self:addChild() is used, or if anything assigns a new field via __newindex.
 
 Use with care: it cannot catch every instance of messing with the table. For example, rawset() and table.insert() do not invoke __newindex.
 
@@ -149,9 +149,9 @@ Use with care: it cannot catch every instance of messing with the table. For exa
 
 `skin_id`: Used when assigning the widget's skin. Skins allow the appearance of widgets to be customized. Not all widgets support skins, and most skins are designed for one or a few specific widgets or skinners (implementations).
 
-Once set, skin_id should not be modified except as part of a skinner/skin replacement action.
+Once set, skin_id should not be modified, except as part of a skinner/skin replacement action.
 
-`skinner`, `skin`: The skinning implementation and data package, respectively. They are assigned to skinned widgets by self:skinSetRefs(). Avoid modifying these tables from the widget instance code, as the changes will affect all other widgets with the same skinner / skin.
+`skinner`, `skin`: The skinning implementation and data package, respectively. They are assigned to skinned widgets by self:skinSetRefs(). Avoid modifying these tables from the widget instance code, as the changes will affect all other widgets with the same skinner / skin. (The ProdUI demo changes skin data for illustrative purposes, but generally, active skins shouldn't be modified at run time.)
 
 
 ### Widget Viewports

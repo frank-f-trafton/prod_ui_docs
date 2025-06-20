@@ -21,7 +21,6 @@
 * Signature: `context:love_update(dt)`
 
 
-
 ## context:love_textinput
 
 * LÖVE Callback: [love.textinput](https://love2d.org/wiki/love.textinput)

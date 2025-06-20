@@ -23,12 +23,12 @@ A [Workspace](../widgets/wimp/workspace.md) fills most (or all) of the applicati
 
 [Window Frames](../widgets/wimp/window_frame.md) are movable rectangles that appear over the Workspace. There can be any number of Window Frames, and they support the following configurations:
 
-* **Modal**: the topmost modal frame blocks interaction with all other frames until dismissed.
+* **Modal**: the topmost modal frame blocks interaction with all other frames, until dismissed.
 
-* **Frame-blocking**: a window frame can block interaction with one other frame until dismissed.
+* **Frame-blocking**: a window frame can block interaction with one other frame, until dismissed.
 
 * **Sorting levels**: "low", "normal", and "high"
 
-* **Workspace association**: When a Workspace is dormant, so too are any of its associated Window Frames. A Window Frame that is *unassociated* will appear even if no Workspace is active.
+* **Workspace association**: When a Workspace is dormant, so too are any of its associated Window Frames. A Window Frame that is *unassociated* will appear, regardless of the current active workspace.
 
 * **Hidden**: Active Window Frames can be made invisible (and denied user input events) while still running.
