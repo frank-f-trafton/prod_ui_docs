@@ -164,10 +164,6 @@
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/label/">base/label</a>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/menu/">base/menu</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/menu_simple/">base/menu_simple</a>
-                </li>
                 <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/radio_button/">base/radio_button</a>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../../widgets/base/slider_bar/">base/slider_bar</a>
@@ -261,30 +257,30 @@
               
                 <h1 id="widgets">Widgets</h1>
 <p>ProdUI uses a basic form of inheritance to provide methods to widgets. When an instance calls a method, it checks:</p>
-<ul>
+<ol>
 <li>Itself</li>
 <li>Its widget definition</li>
 <li><code>_mt_widget</code>, the base table for all widgets</li>
-</ul>
+</ol>
 <p>This is implemented with Lua's built-in <code>__index</code> metamethod. Further subclassing is not supported.</p>
-<p>All widgets are axis aligned rectangles, even if they are invisible and appear formless in UI space.</p>
+<p>All widgets are axis aligned rectangles.</p>
 <h2 id="event-dispatch">Event Dispatch</h2>
 <p>ProdUI supports four forms of event dispatch:</p>
 <ul>
 <li>
-<p><code>self:sendEvent()</code>: Just query <code>self</code>.</p>
+<p><code>self:sendEvent()</code>: Just queries <code>self</code>.</p>
 </li>
 <li>
-<p><code>self:bubbleEvent()</code>: Ascend from the target widget to the root.</p>
+<p><code>self:bubbleEvent()</code>: Ascends from the target widget to the root.</p>
 </li>
 <li>
-<p><code>self:trickleEvent()</code>: Descend from the root to the target widget.</p>
+<p><code>self:trickleEvent()</code>: Descends from the root to the target widget.</p>
 </li>
 <li>
-<p><code>self:cycleEvent()</code>: Trickle down, then bubble up.</p>
+<p><code>self:cycleEvent()</code>: Trickles down, then bubbles up.</p>
 </li>
 </ul>
-<p>The main event callbacks are attached to its indexed metatable, like this:</p>
+<p>The main event callbacks are attached to the widget's indexed metatable, like this:</p>
 <pre><code class="language-lua">function def:uiCall_keyPressed(inst, key, scancode, isrepeat)
 </code></pre>
 <p>These are used in <code>direct</code>, <code>bubble</code>, and the direct and bubble phases of <code>cycle</code>.</p>
@@ -292,12 +288,12 @@
 <pre><code class="language-lua">function def.trickle:uiCall_keyPressed(inst, key, scancode, isrepeat)
 </code></pre>
 <p>Note that the colon syntax is misleading here: we always call the function on the widget table directly, never on <code>wid.trickle</code>. Colon syntax is used only to maintain argument parity with the main callbacks in the source code (so that we don't have to add or remove 'self' when moving code snippets back and forth).</p>
-<p>Typically, the first argument after <code>self</code> is the original calling instance. Widgets that do not have the relevant field are ignored.</p>
+<p>Typically, the first argument after <code>self</code> is the original calling instance (<code>inst</code>).</p>
 <p>Propagation is halted as soon as a widget returns a value that evaluates to true.</p>
-<p>You can use <code>if self == inst then...</code> to differentiate between events acting on <code>self</code>, or events bubbled up from a descendant.</p>
+<p>You can use <code>if self == inst then...</code> to differentiate between events acting on <code>self</code> and events that originate from an ancestor or a descendant.</p>
 <h2 id="the-ui-thimble">The UI Thimble</h2>
 <p>"Thimble" is an arbitrary term for which widget currently has focus. The name is unlikely to be mistaken for other kinds of focus: OS window focus, in-application frame focus, mouse hover + press state, selections within menus, and so on. Generally, the widget which has the thimble is also the target for keyboard input.</p>
-<p>Lamentably, there are two thimbles: <code>thimble1</code> and <code>thimble2</code>. The first is for "concrete" widgets, while the second is for "ephemeral" components like pop-up menus. The <em>Top Thimble</em> is the highest one that is currently assigned to a widget:</p>
+<p>Lamentably, there are two thimbles: <code>thimble1</code> and <code>thimble2</code>. The first is for "concrete" widgets, while the second is for "ephemeral" components, like pop-up menus. The <em>Top Thimble</em> is the highest one that is currently assigned to a widget:</p>
 <pre><code> +--------------------------------------------+
  | thimble1 | thimble2 | Top Thimble is...    |
  +----------+----------+----------------------+
@@ -307,7 +303,7 @@
  |    x     |    x     | thimble2             |
  +--------------------------------------------+
 </code></pre>
-<p>This system, confusing as it is, allows a concrete widget to know that it is still selected, even if key events are temporarily directed to an ephemeral widget.</p>
+<p>This system, unintuitive as it is, allows a concrete widget to know that it is still selected, even if key events are temporarily directed to an ephemeral widget.</p>
 <h2 id="a-note-on-capturing">A Note on "Capturing"</h2>
 <p>A widget can "capture" the UI context. When this happens, all prodUI events are passed to the widget first, and it has the option to deny the event from being handled further by the context. This can be used to implement custom behaviors without interference from the context or other widgets.</p>
 <p>While this enables some nice widget behaviors, be warned that capturing is prone to subtle input bugs. By default, if a capturing widget does not have a capture callback for an event type, then it is always passed on to the main event handler. You may need to capture events that have nothing to do with the desired behavior, and handle them appropriately or discard them. Consolidating similar capture behavior into shared functions is recommended.</p>
@@ -317,7 +313,7 @@
 <p><code>ly_*</code>: Canvas layering</p>
 <p><code>sk_*</code>: Skinner and skin data</p>
 <p><code>usr_*</code>: Arbitrary user (application developer) variables</p>
-<p><code>vp_*</code>: Viewport data (See: Widget Viewports)</p>
+<p><code>vp_*</code>, <code>vp#_*</code>: Viewport data (See: Widget Viewports)</p>
 <h3 id="fields-with-base-widget-metatable-dummy-values">Fields with base widget metatable dummy values</h3>
 <p><code>tag</code> (empty string) A string you can use to help locate widgets.</p>
 <p><code>scr_x, scr_y</code>: Scroll registers, applicable to a widget's children.</p>
@@ -339,16 +335,16 @@
   * "dying": the widget is in the process of being removed from the context.
   * "dead": The widget has been removed from the context.</p>
 <h3 id="fields-applicable-to-widgets-with-children">Fields applicable to widgets with children</h3>
-<p><code>hide_children</code>: When truthy, children are not rendered.</p>
+<p><code>hide_children</code>: When true, children are not rendered.</p>
 <p><code>clip_scissor</code>: When true, rendering of children is clipped to the widget's body. When "manual", the scissor region is specified in 'clip_scissor_x', 'clip_scissor_y', 'clip_scissor_w', and 'clip_scissor_h', relative to the top-left of the widget.</p>
 <p>NOTE: don't use math.huge with setScissor or intersectScissor. It will become zero. -2^16 and 2^17 seem OK.</p>
-<p><code>clip_hover</code>: When true, mouse hover and click detection against children is clipped to the widget's body. When "manual", the clipping region is specified in 'clip_hover_x', 'clip_hover_y', 'clip_hover_w' and 'clip_hover_h'.</p>
-<p><code>_no_descendants</code>: When true, upon widget creation, a special shared table is assigned to self.children. This table raises an error if self:addChild() is used, or if anything assigns a new field via __newindex.</p>
+<p><code>clip_hover</code>: When true, mouse hover and click detection against children are clipped to the widget's body. When "manual", the clipping region is specified in 'clip_hover_x', 'clip_hover_y', 'clip_hover_w' and 'clip_hover_h'.</p>
+<p><code>_no_descendants</code>: When true, upon widget creation, a special shared table is assigned to 'self.children'. This table raises an error if self:addChild() is used, or if anything assigns a new field via __newindex.</p>
 <p>Use with care: it cannot catch every instance of messing with the table. For example, rawset() and table.insert() do not invoke __newindex.</p>
 <h3 id="skin-fields">Skin fields</h3>
 <p><code>skin_id</code>: Used when assigning the widget's skin. Skins allow the appearance of widgets to be customized. Not all widgets support skins, and most skins are designed for one or a few specific widgets or skinners (implementations).</p>
-<p>Once set, skin_id should not be modified except as part of a skinner/skin replacement action.</p>
-<p><code>skinner</code>, <code>skin</code>: The skinning implementation and data package, respectively. They are assigned to skinned widgets by self:skinSetRefs(). Avoid modifying these tables from the widget instance code, as the changes will affect all other widgets with the same skinner / skin.</p>
+<p>Once set, skin_id should not be modified, except as part of a skinner/skin replacement action.</p>
+<p><code>skinner</code>, <code>skin</code>: The skinning implementation and data package, respectively. They are assigned to skinned widgets by self:skinSetRefs(). Avoid modifying these tables from the widget instance code, as the changes will affect all other widgets with the same skinner / skin. (The ProdUI demo changes skin data for illustrative purposes, but generally, active skins shouldn't be modified at run time.)</p>
 <h3 id="widget-viewports">Widget Viewports</h3>
 <p>Viewports are rectangles that widgets can use for placement of their internals, and as the basis for built-in mouse sensors.</p>
 <p><code>Viewport #1: self.vp_x, self.vp_y, self.vp_w, self.vp_h</code></p>
