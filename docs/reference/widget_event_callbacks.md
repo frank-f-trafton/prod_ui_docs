@@ -96,7 +96,10 @@ These fields are reserved by ProdUI in widget tables.
 
 `awake`: When false, the widget and its descendants are skipped when updating.
 
-`can_have_thimble`: When true, widget can obtain the thimble (the UI cursor). As a prerequisite, `awake` must also be true.
+`thimble_mode`: Controls which thimble (UI focus) the widget can obtain. As a prerequisite for taking a thimble, `awake` must also be true.
+  * `0`: None.
+  * `1`: Thimble #1 (for concrete widgets).
+  * `2`: Thimble #2 (for ephemeral widgets).
 
 `allow_hover`: When true, widget is eligible for the 'current_hover' context state. When false, it and all of its descendants are skipped.
 

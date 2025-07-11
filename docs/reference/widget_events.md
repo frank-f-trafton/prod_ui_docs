@@ -531,17 +531,18 @@ Sent to widget.
 
 ### Event Origin
 
-`widget:initialize()`
+* `widget:addChild()`
+* `context:addRoot()`
 
 
 ### Signature
 
-`def:uiCall_initialize(...)`
+`def:uiCall_initialize([...])`
 
 
 #### Parameters
 
-* `...`: (Any) Arguments for the widget setup callback.
+* `[...]`: (Any) Arguments for the widget initialization callback.
 
 
 #### Returns
