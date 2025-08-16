@@ -32,7 +32,7 @@
 
 ## Fonts
 
-* In `prod_ui/themes/vacuum/fonts/noto_sans`:
+* In `prod_ui/resources/font_data/noto_sans`:
 
 	* [Noto Sans](https://fonts.google.com/noto/specimen/Noto+Sans) (OFL)
 
